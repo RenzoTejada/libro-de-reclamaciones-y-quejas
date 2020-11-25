@@ -1,8 +1,8 @@
 <?php
-add_filter('template_include', 'libro_template');
+add_filter('template_include', 'rt_libro_reclamacion_template');
 
 // Page template filter callback
-function libro_template($template)
+function rt_libro_reclamacion_template($template)
 {
     $page_libro_id = get_option('libro_setting_page');
     if(is_page($page_libro_id)){
@@ -12,7 +12,7 @@ function libro_template($template)
 }
 
 
-function grabar_libro_one($libro_data)
+function rt_grabar_libro_reclamacion($libro_data)
 {
     $libro_data['departamento'] = libro_get_departamento_por_id_one($libro_data['departamento']);
     $libro_data['provincia'] = libro_get_provincia_por_id_one($libro_data['provincia']);
@@ -23,14 +23,14 @@ function grabar_libro_one($libro_data)
     $wpdb->insert($table_name, $libro_data);
     $libro_id = $wpdb->insert_id;
     if ($libro_id) {
-        enviar_mail_one($libro_data);
+        rt_enviar_mail_libro_reclamacion($libro_data);
     } else {
         $libro_id = 0;
     }
     return $libro_id;
 }
 
-function enviar_mail_one($libro_data)
+function rt_enviar_mail_libro_reclamacion($libro_data)
 {
     // Email para el administradora
     $subject = __('Claim sent from','rt-libro') .' ' . get_option('blogname');
@@ -40,12 +40,12 @@ function enviar_mail_one($libro_data)
     $mailResult = wp_mail(get_option('admin_email'), $subject, $message, $headers);
     // Email para el usuario
     $message_user = __('Dear:','rt-libro') . " " ." {$libro_data['nombre']}  {$libro_data['apellido_paterno']} ,\r\n\r\n".__('Thank you very much for leaving us your opinion about our services.','rt-libro')."\r\n\r\n".__('Your claim has been successfully received.','rt-libro');
-    $message_user .= "\r\n\r\n".__('Atte.')." \r\n\r\n". get_option( 'blogname' );
+    $message_user .= "\r\n\r\n".__('Atte.','rt-libro')." \r\n\r\n". get_option( 'blogname' );
     $headers = __('From: ','rt-libro') .' '. get_option( 'blogname' ) . ' <'.get_option('admin_email').'>' . "\r\n";
     wp_mail( $libro_data['email'], __('We have received your claim','rt-libro'), $message_user, $headers );
 }
 
-function libro_view_page() {
+function rt_libro_view_page() {
     $html = '';
     if (!is_admin()) {
         
@@ -59,42 +59,42 @@ function libro_view_page() {
         global $rpt;
         global $libro_id;
         $rpt = 3;
-        if ($_POST['guardar_libro_one']) {
+        if ($_POST['guardar_libro_reclamacion']) {
             $libro_data = array(
-                'nombre' => $_POST['nombres'],
-                'apellido_paterno' => $_POST['paterno'],
-                'apellido_materno' => $_POST['materno'],
-                'tipo_doc' => $_POST['tipo_doc'],
-                'nro_documento' => $_POST['nro_doc'],
-                'fono' => $_POST['cel'],
-                'email' => $_POST['correo'],
-                'direccion' => $_POST['direccion'],
-                'referencia' => $_POST['referencia'],
-                'departamento' => $_POST['dep'],
-                'provincia' => $_POST['prov'],
-                'distrito' => $_POST['dist'],
-                'flag_menor' => $_POST['flag_menor'],
-                'nombre_tutor' => $_POST['nombre_tutor'],
-                'email_tutor' => $_POST['correo_tutor'],
-                'tipo_doc_tutor' => $_POST['tipo_doc_tutor'],
-                'numero_documento_tutor' => $_POST['nro_doc_tutor'],
-                'tipo_reclamacion' => $_POST['tipo_reclamo'],
-                'tipo_consumo' => $_POST['tipo_consumo'],
-                'nro_pedido' => $_POST['nro_pedido'],
-                'fch_reclamo' =>  $today = date("Y-m-d",time()),
-                'descripcion' => $_POST['descripcion'],
-                'proveedor' => $_POST['proveedor'],
-                'fch_compra' => $_POST['fch_compra'],
-                'fch_consumo' => $_POST['fch_consumo'],
-                'fch_vencimiento' => $_POST['fch_vencimiento'],
-                'detalle' => $_POST['detalle_reclamo'],
-                'pedido_cliente' => $_POST['pedido_cliente'],
-                'monto_reclamado' => $_POST['monto_reclamado'],
-                'acepta_contenido' => $_POST['acepto'],
-                'acepta_politica' => $_POST['politica'],
+                'nombre' => sanitize_text_field($_POST['nombres']),
+                'apellido_paterno' => sanitize_text_field($_POST['paterno']),
+                'apellido_materno' => sanitize_text_field($_POST['materno']),
+                'tipo_doc' => sanitize_text_field($_POST['tipo_doc']),
+                'nro_documento' => sanitize_text_field($_POST['nro_doc']),
+                'fono' => sanitize_text_field($_POST['cel']),
+                'email' => sanitize_email($_POST['correo']),
+                'direccion' => sanitize_text_field($_POST['direccion']),
+                'referencia' => sanitize_text_field($_POST['referencia']),
+                'departamento' => sanitize_text_field($_POST['dep']),
+                'provincia' => sanitize_text_field($_POST['prov']),
+                'distrito' => sanitize_text_field($_POST['dist']),
+                'flag_menor' => sanitize_text_field($_POST['flag_menor']),
+                'nombre_tutor' => sanitize_text_field($_POST['nombre_tutor']),
+                'email_tutor' => sanitize_text_field($_POST['correo_tutor']),
+                'tipo_doc_tutor' => sanitize_text_field($_POST['tipo_doc_tutor']),
+                'numero_documento_tutor' => sanitize_text_field($_POST['nro_doc_tutor']),
+                'tipo_reclamacion' => sanitize_text_field($_POST['tipo_reclamo']),
+                'tipo_consumo' => sanitize_text_field($_POST['tipo_consumo']),
+                'nro_pedido' => sanitize_text_field($_POST['nro_pedido']),
+                'fch_reclamo' => sanitize_text_field($today = date("Y-m-d",time())),
+                'descripcion' => sanitize_text_field($_POST['descripcion']),
+                'proveedor' => sanitize_text_field($_POST['proveedor']),
+                'fch_compra' => sanitize_text_field($_POST['fch_compra']),
+                'fch_consumo' => sanitize_text_field($_POST['fch_consumo']),
+                'fch_vencimiento' => sanitize_text_field($_POST['fch_vencimiento']),
+                'detalle' => sanitize_text_field($_POST['detalle_reclamo']),
+                'pedido_cliente' => sanitize_text_field($_POST['pedido_cliente']),
+                'monto_reclamado' => sanitize_text_field($_POST['monto_reclamado']),
+                'acepta_contenido' => sanitize_text_field($_POST['acepto']),
+                'acepta_politica' => sanitize_text_field($_POST['politica']),
                 'estado' => 1,
             );
-            $libro_id = grabar_libro_one($libro_data);
+            $libro_id = rt_grabar_libro_reclamacion($libro_data);
             
         }
         $html .= '
@@ -102,7 +102,7 @@ function libro_view_page() {
             <div class="content">
         ';
         $html .= '<section class = "libro-content">';
-        $html .= html_form_one();
+        $html .= rt_html_form_libro_reclamacion();
         $html .= '</section>';
         $html .= '</div>';
         $html .= '</div>';
@@ -110,9 +110,9 @@ function libro_view_page() {
     return $html;
 }
 
-add_shortcode('libro_page', 'libro_view_page');
+add_shortcode('libro_page', 'rt_libro_view_page');
 
-function html_form_one() {
+function rt_html_form_libro_reclamacion() {
 
     $departamentos = rt_libro_get_departamento_front();
     $page_libro_url = (get_option('libro_setting_url') =='' ? '#':get_option('libro_setting_url'));
@@ -325,7 +325,7 @@ function html_form_one() {
             </div>
             <div class="form-row-libro">
                 <div class="column-full" style="text-align: center;">
-                    <input type="submit" id="guardar_libro_one" name="guardar_libro_one" value="'.__('Send','rt-libro').'">
+                    <input type="submit" id="guardar_libro_reclamacion" name="guardar_libro_reclamacion" value="'.__('Send','rt-libro').'">
                 </div>
             </div>
         </div>

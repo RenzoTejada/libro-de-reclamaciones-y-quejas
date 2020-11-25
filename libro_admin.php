@@ -318,14 +318,14 @@ function libro_submenu_settings_general()
         $page_libro_id = get_option('libro_setting_page');
         $page_libro_url = get_option('libro_setting_url');
         if ($page_libro_id) {
-            update_option('libro_setting_page', $_POST['page_libro']);
+            update_option('libro_setting_page', sanitize_text_field($_POST["page_libro"]));
         } else {
-            add_option('libro_setting_page', $_POST['page_libro']);
+            add_option('libro_setting_page', sanitize_text_field($_POST["page_libro"]));
         }
         if($page_libro_url){
-            update_option('libro_setting_url', $_POST['url_libro']);
+            update_option('libro_setting_url', sanitize_text_field($_POST["url_libro"]));
         } else {
-            add_option('libro_setting_url', $_POST['url_libro']);
+            add_option('libro_setting_url', sanitize_text_field($_POST["url_libro"]));
         }
     }
 

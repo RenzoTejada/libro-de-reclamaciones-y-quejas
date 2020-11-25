@@ -8,7 +8,7 @@
  * Plugin Name:     Libro de Reclamaciones y Quejas
  * Plugin URI:      https://renzotejada.com/libro-de-reclamaciones-y-quejas/
  * Description:     Online complaints book is a document through which a consumer can record a complaint regarding a product or service that he has purchased.
- * Version:         0.0.1
+ * Version:         0.0.2
  * Author:          Renzo Tejada
  * Author URI:      https://renzotejada.com/
  * License:         GNU General Public License v3.0
@@ -50,8 +50,8 @@ function libro_add_plugin_page_settings_link($links) {
     return $links;
 }
 
-add_action('wp_head', 'myplugin_ajaxurl');
-function myplugin_ajaxurl() {
+add_action('wp_head', 'rt_libro_reclamaciones_ajaxurl');
+function rt_libro_reclamaciones_ajaxurl() {
     echo '<script type="text/javascript">
            var ajaxurl = "' . admin_url('admin-ajax.php') . '";
          </script>';
