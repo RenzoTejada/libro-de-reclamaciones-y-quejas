@@ -1,0 +1,197 @@
+.container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.title {
+    margin-bottom: 10px;
+    text-align: center;
+    margin-top: -2px;
+    border-bottom: 1px solid #CFCFCF;
+}
+
+.title h2 {
+    display: inline-block;
+    font-size: 30px;
+    margin-bottom: -2px;
+    border-bottom: 2px solid #f01612;
+}
+
+.subtitle h3 {
+    color: #000;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    line-height: 2;
+}
+
+.claim-wong .text-content {
+    width: 100%;
+    margin: 10px auto 0;
+}
+.center {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1440px;
+}
+.claim-wong .description {
+    text-align: center;
+    font-size: 0.825em;
+    margin-bottom: 37px;
+    font-weight: 300;
+    color: #333;
+}
+.claim-wong .description p {
+    line-height: 1.3625rem;
+    margin: 0px;
+    font-weight: 300;
+    color: #525252;
+}
+.claim-wong .description fieldset {
+    border: solid 1px #dadada;
+    background: #f9f9f9;
+}
+
+.claim-wong .description p .color-highlight {
+    color: #f01612;
+}
+.claim-wong .description p span {
+    font-weight: 600;
+    color: #333;
+}
+
+.head {
+    display: block;
+    background: #000;
+    height: 60px;
+    width: 100%;
+    margin: 0 0 80px;
+}
+
+.head .head-logo {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 0;
+    position: relative;
+    top: 8px;
+}
+
+.head .head-logo img {
+    width: 100%;
+}
+
+#responsive-form{
+    width:100% !important;
+    border-radius: 17px !important;
+    border-width: 0px !important;
+    border-style: solid !important;
+    position: relative !important;
+    color: #000000 !important;
+    margin: 0 auto 30px !important;
+    max-width: 940px !important;
+    width: 100% !important;
+}
+
+.column-full .content-wrapper .contact-title h2 {
+    display: inline-block;
+    font-size: 1.3125rem;
+    font-weight: 600;
+    color: #000;
+    padding: 0 0 0 70px;
+}
+
+input#submit, input[type="button"], input[type="submit"] {
+    border-radius: 60px;
+    padding: 10px 40px;
+    color: #ffffff;
+    border-color: #000000;
+    background-color: #000000;
+}
+.form-row-libro{
+    width: 100%;
+}
+.column-half, .column-two, .column-full{
+    float: left;
+    position: relative;
+    padding: 0.65rem;
+    width:100%;;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#responsive-form select {
+    font-size: 1em;
+    padding: 9px;
+    width: 300px;
+}
+
+/* already defined in bootstrap4 */
+.text-xs-center {
+    text-align: center;
+}
+
+.g-recaptcha {
+    display: inline-block;
+}
+
+.alert{
+    color:#b60416;
+}
+
+label.error{
+    color:#b60416;
+}
+
+.column-full .font-icn.ico-data {
+    background: url(../ico-datos.jpg) no-repeat top center /100% auto;
+}
+
+.column-full .font-icn {
+    display: inline-block;
+    position: absolute;
+    margin: -10px 12px 0 -65px;
+    width: 40px;
+    height: 40px;
+}
+
+.column-full h2 {
+    /*margin: 0 70px 20px;*/
+    font-size: 30px;
+    text-align: left;
+}
+
+.column-full .font-icn.ico-claim {
+    background: url(../ico-reclamos.jpg) no-repeat top center /100% auto;
+}
+.column-full .font-icn {
+    display: inline-block;
+    position: absolute;
+    margin: -10px 12px 0 -65px;
+    width: 40px;
+    height: 40px;
+}
+
+
+/**---------------- Media query ----------------**/
+@media only screen and (min-width: 48em) { 
+    .column-half{
+        width: 33.33%;
+    }
+    .column-two{
+        width: 50%;
+    }
+}
+
+@media (min-width: 700px){
+    section {
+         padding: 0rem 0; 
+    }
+}

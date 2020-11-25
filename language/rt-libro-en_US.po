@@ -1,0 +1,443 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Libro de Reclamaciones y Quejas\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-25 03:44+0000\n"
+"PO-Revision-Date: 2020-11-25 03:44+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.4.6; wp-5.5.3"
+
+#: libro_admin.php:11 libro_admin.php:12
+msgid "Libro de Reclamaciones"
+msgstr ""
+
+#: libro_admin.php:35 libro_admin.php:85
+msgid "Detail"
+msgstr ""
+
+#: libro_admin.php:47
+msgid "Action"
+msgstr ""
+
+#: libro_admin.php:48 libro_admin.php:101 libro_shortcode.php:142
+#: libro_shortcode.php:143 libro_shortcode.php:217 libro_shortcode.php:218
+msgid "Name"
+msgstr ""
+
+#: libro_admin.php:49 libro_admin.php:109
+msgid "First last name"
+msgstr ""
+
+#: libro_admin.php:50 libro_admin.php:117
+msgid "Second last name"
+msgstr ""
+
+#: libro_admin.php:51 libro_admin.php:141 libro_shortcode.php:165
+msgid "Celphone"
+msgstr ""
+
+#: libro_admin.php:52 libro_admin.php:149 libro_shortcode.php:196
+#: libro_shortcode.php:197 libro_shortcode.php:220 libro_shortcode.php:221
+msgid "Email"
+msgstr ""
+
+#: libro_admin.php:53 libro_admin.php:247
+msgid "Product description"
+msgstr ""
+
+#: libro_admin.php:54 libro_admin.php:285
+msgid "Claim detail"
+msgstr ""
+
+#: libro_admin.php:55
+msgid "Clients order"
+msgstr ""
+
+#: libro_admin.php:56 libro_admin.php:297 libro_shortcode.php:270
+#: libro_shortcode.php:271
+msgid "Reclaimed amount"
+msgstr ""
+
+#: libro_admin.php:95
+msgid "Claim / Complaint Nro"
+msgstr ""
+
+#: libro_admin.php:125 libro_admin.php:198 libro_shortcode.php:153
+#: libro_shortcode.php:225
+msgid "Type of documentation"
+msgstr ""
+
+#: libro_admin.php:133 libro_admin.php:206 libro_shortcode.php:162
+#: libro_shortcode.php:163 libro_shortcode.php:166
+msgid "Documentation number"
+msgstr ""
+
+#: libro_admin.php:157 libro_shortcode.php:170
+msgid "Department"
+msgstr ""
+
+#: libro_admin.php:165 libro_shortcode.php:178
+msgid "Province"
+msgstr ""
+
+#: libro_admin.php:173 libro_shortcode.php:183
+msgid "District"
+msgstr ""
+
+#: libro_admin.php:182
+msgid "Name of tutor"
+msgstr ""
+
+#: libro_admin.php:190
+msgid "Email of tutor"
+msgstr ""
+
+#: libro_admin.php:215
+msgid "Claim type"
+msgstr ""
+
+#: libro_admin.php:223 libro_shortcode.php:252 libro_shortcode.php:254
+msgid "Type of consumption"
+msgstr ""
+
+#: libro_admin.php:231
+msgid "Order number"
+msgstr ""
+
+#: libro_admin.php:239
+msgid "Claim date"
+msgstr ""
+
+#: libro_admin.php:253 libro_shortcode.php:267 libro_shortcode.php:268
+msgid "Provider"
+msgstr ""
+
+#: libro_admin.php:261 libro_shortcode.php:281
+msgid "Date of purchase"
+msgstr ""
+
+#: libro_admin.php:269
+msgid "Consumption date"
+msgstr ""
+
+#: libro_admin.php:277 libro_shortcode.php:287
+msgid "Expiration date"
+msgstr ""
+
+#: libro_admin.php:291
+msgid "Client order"
+msgstr ""
+
+#: libro_admin.php:305
+msgid "I accept the content"
+msgstr ""
+
+#: libro_admin.php:306
+msgid "I accept the Privacy and Security Policy"
+msgstr ""
+
+#: libro_admin.php:345
+msgid "General setting"
+msgstr ""
+
+#: libro_admin.php:351
+msgid "Add the following shortcode"
+msgstr ""
+
+#: libro_admin.php:354
+msgid "Copy"
+msgstr ""
+
+#: libro_admin.php:359
+msgid "Administration email address"
+msgstr ""
+
+#: libro_admin.php:362 libro_admin.php:404
+msgid "This address is used for notifications of claims and / or complaints."
+msgstr ""
+
+#: libro_admin.php:366
+msgid "Choose page for complaint book"
+msgstr ""
+
+#: libro_admin.php:389
+msgid "Select page"
+msgstr ""
+
+#: libro_admin.php:401
+msgid "Url of Privacy and Security Policy and Cookies Policy"
+msgstr ""
+
+#: libro_admin.php:412
+msgid "Guadar cambios"
+msgstr ""
+
+#: libro_admin.php:424
+msgid "Claims and Complaints Book"
+msgstr ""
+
+#: libro_admin.php:432
+msgid "List"
+msgstr ""
+
+#: libro_admin.php:437
+msgid "Setting"
+msgstr ""
+
+#: libro_admin.php:459 libro_shortcode.php:156 libro_shortcode.php:228
+msgid "DNI"
+msgstr ""
+
+#: libro_admin.php:462 libro_shortcode.php:157 libro_shortcode.php:229
+msgid "CE"
+msgstr ""
+
+#: libro_admin.php:465 libro_shortcode.php:158 libro_shortcode.php:230
+msgid "Passport"
+msgstr ""
+
+#: libro_admin.php:468 libro_shortcode.php:159 libro_shortcode.php:231
+msgid "RUC"
+msgstr ""
+
+#: libro_admin.php:480 libro_shortcode.php:248 libro_shortcode.php:305
+msgid "Claim"
+msgstr ""
+
+#: libro_admin.php:483 libro_shortcode.php:249 libro_shortcode.php:306
+msgid "Complain"
+msgstr ""
+
+#: libro_admin.php:494 libro_shortcode.php:255
+msgid "Product"
+msgstr ""
+
+#: libro_admin.php:497 libro_shortcode.php:256
+msgid "Service"
+msgstr ""
+
+#: libro_setup.php:66
+msgid ""
+"Libro de Reclamaciones y Quejas: The module needs to have Peru's Ubigeo "
+"installed to operate correctly."
+msgstr ""
+
+#: libro_shortcode.php:36
+msgid "Claim sent from"
+msgstr ""
+
+#: libro_shortcode.php:37
+msgid "Claims Book Registry"
+msgstr ""
+
+#: libro_shortcode.php:38
+msgid "A new complaint / complaint was registered."
+msgstr ""
+
+#: libro_shortcode.php:39 libro_shortcode.php:44
+msgid "From:"
+msgstr ""
+
+#: libro_shortcode.php:42
+msgid "Dear:"
+msgstr ""
+
+#: libro_shortcode.php:42
+msgid "Thank you very much for leaving us your opinion about our services."
+msgstr ""
+
+#: libro_shortcode.php:42
+msgid "Your claim has been successfully received."
+msgstr ""
+
+#: libro_shortcode.php:45
+msgid "We have received your claim"
+msgstr ""
+
+#: libro_shortcode.php:126
+msgid "Your claim / complaint was registered:"
+msgstr ""
+
+#: libro_shortcode.php:132
+msgid "Your claim / complaint was NOT registered"
+msgstr ""
+
+#: libro_shortcode.php:138
+msgid "Complaining Consumer Identification"
+msgstr ""
+
+#: libro_shortcode.php:139
+msgid "Required data"
+msgstr ""
+
+#: libro_shortcode.php:145 libro_shortcode.php:146
+msgid "First Lastname"
+msgstr ""
+
+#: libro_shortcode.php:148 libro_shortcode.php:149
+msgid "Second Lastname"
+msgstr ""
+
+#: libro_shortcode.php:155
+msgid "Select of documentation"
+msgstr ""
+
+#: libro_shortcode.php:172
+msgid "Select of department"
+msgstr ""
+
+#: libro_shortcode.php:180
+msgid "Select of province"
+msgstr ""
+
+#: libro_shortcode.php:185
+msgid "Select of district"
+msgstr ""
+
+#: libro_shortcode.php:190 libro_shortcode.php:191
+msgid "Address"
+msgstr ""
+
+#: libro_shortcode.php:193 libro_shortcode.php:194
+msgid "Reference"
+msgstr ""
+
+#: libro_shortcode.php:204
+msgid "Are you a minor?"
+msgstr ""
+
+#: libro_shortcode.php:206
+msgid "Yes"
+msgstr ""
+
+#: libro_shortcode.php:209
+msgid "No"
+msgstr ""
+
+#: libro_shortcode.php:214
+msgid "Father / Mother / Tutor"
+msgstr ""
+
+#: libro_shortcode.php:227
+msgid "Select of documetation"
+msgstr ""
+
+#: libro_shortcode.php:234 libro_shortcode.php:235
+msgid "Number of document"
+msgstr ""
+
+#: libro_shortcode.php:242
+msgid "Detail of the Claim and Consumer Order"
+msgstr ""
+
+#: libro_shortcode.php:242
+msgid "Required data "
+msgstr ""
+
+#: libro_shortcode.php:245 libro_shortcode.php:247
+msgid "Claim Type"
+msgstr ""
+
+#: libro_shortcode.php:259
+msgid "Order No."
+msgstr ""
+
+#: libro_shortcode.php:264
+msgid "Claim / complaint date"
+msgstr ""
+
+#: libro_shortcode.php:276
+msgid "Description of the product or service"
+msgstr ""
+
+#: libro_shortcode.php:284
+msgid "Date of Consumption"
+msgstr ""
+
+#: libro_shortcode.php:293
+msgid "Detail of the Claim / Complaint, as indicated by the client"
+msgstr ""
+
+#: libro_shortcode.php:299
+msgid "Client ordert"
+msgstr ""
+
+#: libro_shortcode.php:305
+msgid "Disagreement related to products and / or services."
+msgstr ""
+
+#: libro_shortcode.php:306
+msgid ""
+"Disagreement not related to products and / or services; or, discomfort or "
+"dissatisfaction with the attention to the public."
+msgstr ""
+
+#: libro_shortcode.php:312
+msgid ""
+"I declare that I am the owner of the service and I accept the content of "
+"this form by stating under an Affidavit the veracity of the facts described."
+msgstr ""
+
+#: libro_shortcode.php:315
+msgid ""
+"The formulation of the claim does not preclude resorting to other means of "
+"dispute resolution nor is it a prerequisite for filing a complaint with "
+"Indecopi."
+msgstr ""
+
+#: libro_shortcode.php:316
+msgid ""
+"The provider must respond to the claim within a period of no more than "
+"thirty (30) calendar days, being able to extend the period up to thirty days."
+msgstr ""
+
+#: libro_shortcode.php:317
+msgid ""
+"By signing this document, the client authorizes to be contacted after the "
+"claim has been dealt with in order to evaluate the quality and satisfaction "
+"with the claims service process."
+msgstr ""
+
+#: libro_shortcode.php:323
+msgid ""
+"I have read and accept the Privacy and Security Policy and the Cookies "
+"Policy."
+msgstr ""
+
+#: libro_shortcode.php:328
+msgid "Send"
+msgstr ""
+
+#: rt-libro-reclamaciones.php:39
+msgid "Settings"
+msgstr ""
+
+#. Name of the plugin
+msgid "Libro de Reclamaciones y Quejas"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Libro de reclamaciones online es un documento a través del cual un "
+"consumidor puede hacer constar una queja relativa a un producto o servicio "
+"que ha adquirido."
+msgstr ""
+
+#. URI of the plugin
+msgid "https://renzotejada.com/libro-de-reclamaciones-y-quejas/"
+msgstr ""
+
+#. Author of the plugin
+msgid "Renzo Tejada"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://renzotejada.com/"
+msgstr ""
