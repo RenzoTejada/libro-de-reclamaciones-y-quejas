@@ -1,26 +1,30 @@
 <?php
-if (!defined('ABSPATH'))
-    exit; // Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 
 /************************* ADMIN PAGE **********************************
  ***********************************************************************/
 
 add_action('admin_menu', 'libro_register_admin_page');
 
-function libro_register_admin_page() {
-    add_menu_page('Libro de Reclamaciones',  __('Libro de Reclamaciones', 'rt-libro') , 'read', 'page_libro', '', 'dashicons-book-alt', 50);
-    add_submenu_page('page_libro', 'Configuraciones',  __('Libro de Reclamaciones', 'rt-libro'), 'manage_options', 'libro_settings', 'libro_submenu_settings_callback');
+function libro_register_admin_page()
+{
+    add_menu_page('Libro de Reclamaciones', __('Libro de Reclamaciones', 'rt-libro'), 'read', 'page_libro', '', 'dashicons-book-alt', 50);
+    add_submenu_page('page_libro', 'Configuraciones', __('Libro de Reclamaciones', 'rt-libro'), 'manage_options', 'libro_settings', 'libro_submenu_settings_callback');
     remove_submenu_page('page_libro', 'page_libro');
 }
 
-function get_all_reclamos($estado) {
+function get_all_reclamos($estado)
+{
     global $wpdb;
     $table_name = $wpdb->prefix . "rt_libro" ;
     $request = "SELECT * FROM $table_name where estado =" . $estado ;
     return $wpdb->get_results($request, ARRAY_A);
 }
 
-function get_reclamo_by_id($id) {
+function get_reclamo_by_id($id)
+{
     global $wpdb;
     $table_name = $wpdb->prefix . "rt_libro" ;
     $request = "SELECT * FROM $table_name where estado = 1 and libro_id =" . $id;
@@ -28,7 +32,8 @@ function get_reclamo_by_id($id) {
     return $rpt[0];
 }
 
-function libro_submenu_settings_home() {
+function libro_submenu_settings_home()
+{
     ?>
     <div style="display:none;position:fixed;background-color:white;border:1px solid black;width:50%;max-height:80%;text-align:center;top:100px;" id="detallesolicitud">
         <button style="float:right;color:white;background-color:red;" onclick="jQuery('#detallesolicitud').hide();">X</button>
@@ -77,9 +82,9 @@ function libro_submenu_settings_home() {
     }
 }
 
-function libro_submenu_settings_ver(){
-    $id = $_REQUEST['ver'];
-    ?>
+function libro_submenu_settings_ver()
+{
+    $id = $_REQUEST['ver']; ?>
      <div style="display:none;position:fixed;background-color:white;border:1px solid black;width:50%;max-height:80%;text-align:center;top:100px;" id="detallesolicitud">
         <button style="float:right;color:white;background-color:red;" onclick="jQuery('#detallesolicitud').hide();">X</button>
         <b><?php  _e('Detail', 'rt-libro') ?></b><br/>
@@ -313,7 +318,6 @@ function libro_submenu_settings_ver(){
 
 function libro_submenu_settings_general()
 {
- 
     if ($_POST["btn_guardar_setting"]) {
         $page_libro_id = get_option('libro_setting_page');
         $page_libro_url = get_option('libro_setting_url');
@@ -322,7 +326,7 @@ function libro_submenu_settings_general()
         } else {
             add_option('libro_setting_page', sanitize_text_field($_POST["page_libro"]));
         }
-        if($page_libro_url){
+        if ($page_libro_url) {
             update_option('libro_setting_url', sanitize_text_field($_POST["url_libro"]));
         } else {
             add_option('libro_setting_url', sanitize_text_field($_POST["url_libro"]));
@@ -330,8 +334,7 @@ function libro_submenu_settings_general()
     }
 
     $page_libro_id = get_option('libro_setting_page');
-    $page_libro_url = get_option('libro_setting_url');
-    ?>
+    $page_libro_url = get_option('libro_setting_url'); ?>
     <script>
         function copiarShortcode(id_elemento) {
             var aux = document.createElement("input");
@@ -383,16 +386,14 @@ function libro_submenu_settings_general()
                             'post_type' => 'page',
                             'post_status' => 'publish'
                         );
-                        $all_page = get_pages($args);
-                        ?>
+    $all_page = get_pages($args); ?>
                         <select name="page_libro" id="page_libro">
                             <option value=""><?php _e('Select page', 'rt-libro') ?></option>
                             <?php foreach ($all_page as $page) {
-                                $selected = ($page->ID == $page_libro_id) ? 'selected' : '';
-                                ?>
+        $selected = ($page->ID == $page_libro_id) ? 'selected' : ''; ?>
                                 <option value="<?php echo $page->ID ?>" <?php echo $selected; ?>><?php echo $page->post_title ?></option>
-                            <?php }
-                            ?>
+                            <?php
+    } ?>
                         </select>
                     </td>
                 </tr>
@@ -409,14 +410,14 @@ function libro_submenu_settings_general()
         <p class="submit">
             <?php
             $attributes = array('id' => 'btn_guardar_setting');
-            submit_button(__('Save changes', 'rt-libro'), 'button button-primary', 'btn_guardar_setting', true, $attributes);
-            ?>
+    submit_button(__('Save changes', 'rt-libro'), 'button button-primary', 'btn_guardar_setting', true, $attributes); ?>
         </p>
     </form>
     <?php
 }
 
-function libro_submenu_settings_callback() {
+function libro_submenu_settings_callback()
+{
     ?>
     <div class="wrap woocommerce" >
         <div style="background-color:#87b43e;">
@@ -428,32 +429,29 @@ function libro_submenu_settings_callback() {
             <a href="?page=libro_settings&tab=home" class="nav-tab <?php
             if ((!isset($_REQUEST['tab'])) || ($_REQUEST['tab'] == "home")) {
                 print " nav-tab-active";
-            }
-            ?>"><?php _e('List', 'rt-libro') ?></a>
+            } ?>"><?php _e('List', 'rt-libro') ?></a>
             <a href="?page=libro_settings&tab=setting" class="nav-tab <?php
             if (($_REQUEST['tab'] == "setting")) {
                 print " nav-tab-active";
-            }
-            ?>"><?php _e('Setting', 'rt-libro') ?></a>
+            } ?>"><?php _e('Setting', 'rt-libro') ?></a>
         </h2>
         <?php
         if ((!isset($_REQUEST['tab'])) || ($_REQUEST['tab'] == "home")) {
-             if (isset($_REQUEST['ver']) || ($_REQUEST['ver'] > 0) ) {
-                 libro_submenu_settings_ver();
-             } else {
-                 libro_submenu_settings_home();
-             }
+            if (isset($_REQUEST['ver']) || ($_REQUEST['ver'] > 0)) {
+                libro_submenu_settings_ver();
+            } else {
+                libro_submenu_settings_home();
+            }
         }
-        if (($_REQUEST['tab'] == "setting")) {
-            libro_submenu_settings_general();
-        }
-        ?>
+    if (($_REQUEST['tab'] == "setting")) {
+        libro_submenu_settings_general();
+    } ?>
     </div>
     <?php
 }
 
-function get_tipo_documentacion($id_tipo) {
-    
+function get_tipo_documentacion($id_tipo)
+{
     switch ($id_tipo) {
         case 1:
             $name = __('DNI', 'rt-libro');
@@ -470,11 +468,10 @@ function get_tipo_documentacion($id_tipo) {
     }
     
     return $name;
-    
 }
 
-function get_tipo_reclamacion($id_tipo) {
-    
+function get_tipo_reclamacion($id_tipo)
+{
     switch ($id_tipo) {
         case 1:
             $name = __('Claim', 'rt-libro');

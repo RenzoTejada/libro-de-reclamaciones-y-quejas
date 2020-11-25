@@ -18,12 +18,13 @@
  */
 
 
-if (!defined('ABSPATH'))
-    exit; // Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 
 $plugin_libro_version = get_file_data(__FILE__, array('Version' => 'Version'), false);
 
-define ( 'Version_Libro_RT', $plugin_libro_version['Version'] );
+define('Version_Libro_RT', $plugin_libro_version['Version']);
 
 function rt_libro_load_textdomain()
 {
@@ -40,7 +41,8 @@ add_action('wp_ajax_nopriv_rt_libro_load_provincias_front', 'rt_libro_load_provi
 add_action('wp_ajax_rt_libro_load_distrito_front', 'rt_libro_load_distrito_front');
 add_action('wp_ajax_nopriv_rt_libro_load_distrito_front', 'rt_libro_load_distrito_front');
 
-function libro_add_plugin_page_settings_link($links) {
+function libro_add_plugin_page_settings_link($links)
+{
     $links2[] = '<a href="' .
             admin_url('admin.php?page=libro_settings') .
              '">' .  __('Settings', 'rt-libro') . '</a>';
@@ -51,7 +53,8 @@ function libro_add_plugin_page_settings_link($links) {
 }
 
 add_action('wp_head', 'rt_libro_reclamaciones_ajaxurl');
-function rt_libro_reclamaciones_ajaxurl() {
+function rt_libro_reclamaciones_ajaxurl()
+{
     echo '<script type="text/javascript">
            var ajaxurl = "' . admin_url('admin-ajax.php') . '";
          </script>';
@@ -77,7 +80,6 @@ require dirname(__FILE__) . "/libro_admin.php";
 require dirname(__FILE__) . "/libro_shortcode.php";
 
 if (ubigeo_peru_plugin_libro_enabled()) {
-    
 } else {
     add_action('admin_notices', 'libro_errornoubigeoperu');
 }
