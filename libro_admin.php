@@ -10,7 +10,7 @@ add_action('admin_menu', 'libro_register_admin_page');
 
 function libro_register_admin_page()
 {
-    add_menu_page('Libro de Reclamaciones', __('Libro de Reclamaciones', 'rt-libro'), 'read', 'page_libro', '', 'dashicons-book-alt', 50);
+    add_menu_page('Libro de Reclamaciones', __('Libro de Reclamaciones', 'rt-libro'), 'administrator', 'page_libro', '', 'dashicons-book-alt', 50);
     add_submenu_page('page_libro', 'Configuraciones', __('Libro de Reclamaciones', 'rt-libro'), 'manage_options', 'libro_settings', 'libro_submenu_settings_callback');
     remove_submenu_page('page_libro', 'page_libro');
 }
@@ -84,7 +84,7 @@ function libro_submenu_settings_home()
 
 function libro_submenu_settings_ver()
 {
-    $id = $_REQUEST['ver']; ?>
+    $id = sanitize_text_field($_REQUEST['ver']); ?>
      <div style="display:none;position:fixed;background-color:white;border:1px solid black;width:50%;max-height:80%;text-align:center;top:100px;" id="detallesolicitud">
         <button style="float:right;color:white;background-color:red;" onclick="jQuery('#detallesolicitud').hide();">X</button>
         <b><?php  _e('Detail', 'rt-libro') ?></b><br/>
@@ -418,6 +418,7 @@ function libro_submenu_settings_general()
 
 function libro_submenu_settings_callback()
 {
+    if(current_user_can( 'manage_options' )){
     ?>
     <div class="wrap woocommerce" >
         <div style="background-color:#87b43e;">
@@ -448,6 +449,7 @@ function libro_submenu_settings_callback()
     } ?>
     </div>
     <?php
+    }
 }
 
 function get_tipo_documentacion($id_tipo)
