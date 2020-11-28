@@ -418,8 +418,8 @@ function libro_submenu_settings_general()
 
 function libro_submenu_settings_callback()
 {
-    if(current_user_can( 'manage_options' )){
-    ?>
+    if (current_user_can('manage_options')) {
+        ?>
     <div class="wrap woocommerce" >
         <div style="background-color:#87b43e;">
         </div>
@@ -444,9 +444,9 @@ function libro_submenu_settings_callback()
                 libro_submenu_settings_home();
             }
         }
-    if (($_REQUEST['tab'] == "setting")) {
-        libro_submenu_settings_general();
-    } ?>
+        if (($_REQUEST['tab'] == "setting")) {
+            libro_submenu_settings_general();
+        } ?>
     </div>
     <?php
     }
