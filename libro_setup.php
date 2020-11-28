@@ -3,9 +3,9 @@
 function libro_setup()
 {
     $rt_libro_db_version = get_option('rt_libro_db_version');
-    if (version_compare(Version_Libro_RT, $rt_libro_db_version) > 0) {
+    if (version_compare(Version_RT_Libro_Reclamaciones, $rt_libro_db_version) > 0) {
         create_tables_default();
-        update_option('rt_libro_db_version', Version_Libro_RT);
+        update_option('rt_libro_db_version', Version_RT_Libro_Reclamaciones);
     }
 }
 

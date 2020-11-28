@@ -1,8 +1,8 @@
 <?php
-add_filter('template_include', 'rt_libro_reclamacion_template');
+add_filter('template_include', 'rt_libro_lrq_reclamacion_template');
 
 // Page template filter callback
-function rt_libro_reclamacion_template($template)
+function rt_libro_lrq_reclamacion_template($template)
 {
     $page_libro_id = get_option('libro_setting_page');
     if (is_page($page_libro_id)) {

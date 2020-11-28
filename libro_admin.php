@@ -6,16 +6,16 @@ if (!defined('ABSPATH')) {
 /************************* ADMIN PAGE **********************************
  ***********************************************************************/
 
-add_action('admin_menu', 'libro_register_admin_page');
+add_action('admin_menu', 'rt_libro_lrq_register_admin_page');
 
-function libro_register_admin_page()
+function rt_libro_lrq_register_admin_page()
 {
     add_menu_page('Libro de Reclamaciones', __('Libro de Reclamaciones', 'rt-libro'), 'administrator', 'page_libro', '', 'dashicons-book-alt', 50);
     add_submenu_page('page_libro', 'Configuraciones', __('Libro de Reclamaciones', 'rt-libro'), 'manage_options', 'libro_settings', 'libro_submenu_settings_callback');
     remove_submenu_page('page_libro', 'page_libro');
 }
 
-function get_all_reclamos($estado)
+function rt_libro_lrq_get_all_reclamos($estado)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "rt_libro" ;
@@ -23,7 +23,7 @@ function get_all_reclamos($estado)
     return $wpdb->get_results($request, ARRAY_A);
 }
 
-function get_reclamo_by_id($id)
+function rt_libro_lrq_get_reclamo_by_id($id)
 {
     global $wpdb;
     $table_name = $wpdb->prefix . "rt_libro" ;
@@ -43,7 +43,7 @@ function libro_submenu_settings_home()
     </div>
     <h2></h2>
     <?php
-    $listado = get_all_reclamos(1);
+    $listado = rt_libro_lrq_get_all_reclamos(1);
 
     if ($listado) {
         print "<table class='wc-shipping-zones widefat'>";
@@ -98,7 +98,7 @@ function libro_submenu_settings_ver()
     </ul>
     <br class="clear">
     <h2><?php  _e('Claim / Complaint Nro', 'rt-libro') ?> : <?php echo $id ?></h2>
-    <?php $reclamo = get_reclamo_by_id($id); ?>
+    <?php $reclamo = rt_libro_lrq_get_reclamo_by_id($id); ?>
     <div class="wrap">
             <table class="form-table" role="presentation">
                 <tbody>
@@ -499,7 +499,7 @@ function get_tipo_consumo($id_tipo)
     return $name;
 }
 
-function ubigeo_peru_plugin_libro_enabled()
+function rt_libro_lrq_ubigeo_peru_plugin_libro_enabled()
 {
     if (in_array('ubigeo-peru/ubigeo-peru.php', (array) get_option('active_plugins', array()))) {
         return true;
