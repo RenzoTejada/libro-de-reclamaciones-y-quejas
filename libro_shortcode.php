@@ -12,25 +12,25 @@ function rt_libro_lrq_reclamacion_template($template)
 }
 
 
-function rt_grabar_libro_reclamacion($libro_data)
+function rt_libro_lrq_grabar_libro_reclamacion($libro_data)
 {
-    $libro_data['departamento'] = libro_get_departamento_por_id_one($libro_data['departamento']);
-    $libro_data['provincia'] = libro_get_provincia_por_id_one($libro_data['provincia']);
-    $libro_data['distrito'] = libro_get_distrito_por_id_one($libro_data['distrito']);
+    $libro_data['departamento'] = rt_libro_lrq_get_departamento_por_id_one($libro_data['departamento']);
+    $libro_data['provincia'] = rt_libro_lrq_get_provincia_por_id_one($libro_data['provincia']);
+    $libro_data['distrito'] = rt_libro_lrq_get_distrito_por_id_one($libro_data['distrito']);
 
     global $wpdb;
     $table_name = $wpdb->prefix . "rt_libro";
     $wpdb->insert($table_name, $libro_data);
     $libro_id = $wpdb->insert_id;
     if ($libro_id) {
-        rt_enviar_mail_libro_reclamacion($libro_data);
+        rt_libro_lrq_enviar_mail_libro_reclamacion($libro_data);
     } else {
         $libro_id = 0;
     }
     return $libro_id;
 }
 
-function rt_enviar_mail_libro_reclamacion($libro_data)
+function rt_libro_lrq_enviar_mail_libro_reclamacion($libro_data)
 {
     // Email para el administradora
     $subject = __('Claim sent from', 'rt-libro') .' ' . get_option('blogname');
@@ -45,7 +45,7 @@ function rt_enviar_mail_libro_reclamacion($libro_data)
     wp_mail($libro_data['email'], __('We have received your claim', 'rt-libro'), $message_user, $headers);
 }
 
-function rt_libro_view_page()
+function rt_libro_lrq_view_page()
 {
     $html = '';
     if (!is_admin()) {
@@ -94,14 +94,14 @@ function rt_libro_view_page()
                 'acepta_politica' => sanitize_text_field($_POST['politica']),
                 'estado' => 1,
             );
-            $libro_id = rt_grabar_libro_reclamacion($libro_data);
+            $libro_id = rt_libro_lrq_grabar_libro_reclamacion($libro_data);
         }
         $html .= '
         <div class="wrapper claim-wong center">
             <div class="content">
         ';
         $html .= '<section class = "libro-content">';
-        $html .= rt_html_form_libro_reclamacion();
+        $html .= rt_libro_lrq_html_form_libro_reclamacion();
         $html .= '</section>';
         $html .= '</div>';
         $html .= '</div>';
@@ -109,11 +109,11 @@ function rt_libro_view_page()
     return $html;
 }
 
-add_shortcode('libro_page', 'rt_libro_view_page');
+add_shortcode('libro_page', 'rt_libro_lrq_view_page');
 
-function rt_html_form_libro_reclamacion()
+function rt_libro_lrq_html_form_libro_reclamacion()
 {
-    $departamentos = rt_libro_get_departamento_front();
+    $departamentos = rt_libro_lrq_get_departamento_front();
     $page_libro_url = (get_option('libro_setting_url') =='' ? '#':get_option('libro_setting_url'));
     $html = '';
     $today = date("d/m/Y", time());

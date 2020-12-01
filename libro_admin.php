@@ -11,7 +11,7 @@ add_action('admin_menu', 'rt_libro_lrq_register_admin_page');
 function rt_libro_lrq_register_admin_page()
 {
     add_menu_page('Libro de Reclamaciones', __('Libro de Reclamaciones', 'rt-libro'), 'administrator', 'page_libro', '', 'dashicons-book-alt', 50);
-    add_submenu_page('page_libro', 'Configuraciones', __('Libro de Reclamaciones', 'rt-libro'), 'manage_options', 'libro_settings', 'libro_submenu_settings_callback');
+    add_submenu_page('page_libro', 'Configuraciones', __('Libro de Reclamaciones', 'rt-libro'), 'manage_options', 'libro_settings', 'rt_libro_lrq_submenu_settings_callback');
     remove_submenu_page('page_libro', 'page_libro');
 }
 
@@ -32,7 +32,7 @@ function rt_libro_lrq_get_reclamo_by_id($id)
     return $rpt[0];
 }
 
-function libro_submenu_settings_home()
+function rt_libro_lrq_submenu_settings_home()
 {
     ?>
     <div style="display:none;position:fixed;background-color:white;border:1px solid black;width:50%;max-height:80%;text-align:center;top:100px;" id="detallesolicitud">
@@ -82,7 +82,7 @@ function libro_submenu_settings_home()
     }
 }
 
-function libro_submenu_settings_ver()
+function rt_libro_lrq_submenu_settings_ver()
 {
     $id = sanitize_text_field($_REQUEST['ver']); ?>
      <div style="display:none;position:fixed;background-color:white;border:1px solid black;width:50%;max-height:80%;text-align:center;top:100px;" id="detallesolicitud">
@@ -130,7 +130,7 @@ function libro_submenu_settings_ver()
                         <th scope="row"><?php _e('Type of documentation', 'rt-libro') ?></th>
                         <td>
                             <fieldset>
-                                <label><?php echo get_tipo_documentacion($reclamo['tipo_doc']); ?></label>
+                                <label><?php echo rt_libro_lrq_get_tipo_documentacion($reclamo['tipo_doc']); ?></label>
                             </fieldset>
                         </td>
                     </tr>
@@ -203,7 +203,7 @@ function libro_submenu_settings_ver()
                             <th scope="row"><?php _e('Type of documentation', 'rt-libro') ?></th>
                             <td>
                                 <fieldset>
-                                    <label><?php echo get_tipo_documentacion($reclamo['tipo_doc_tutor']); ?></label>
+                                    <label><?php echo rt_libro_lrq_get_tipo_documentacion($reclamo['tipo_doc_tutor']); ?></label>
                                 </fieldset>
                             </td>
                         </tr>
@@ -220,7 +220,7 @@ function libro_submenu_settings_ver()
                         <th scope="row"><?php _e('Claim type', 'rt-libro') ?></th>
                         <td>
                             <fieldset>
-                                <label><?php echo get_tipo_reclamacion($reclamo['tipo_reclamacion']) ?></label>
+                                <label><?php echo rt_libro_lrq_get_tipo_reclamacion($reclamo['tipo_reclamacion']) ?></label>
                             </fieldset>
                         </td>
                     </tr>
@@ -228,7 +228,7 @@ function libro_submenu_settings_ver()
                         <th scope="row"><?php _e('Type of consumption', 'rt-libro') ?></th>
                         <td>
                             <fieldset>
-                                <label><?php echo get_tipo_consumo($reclamo['tipo_consumo']) ?></label>
+                                <label><?php echo rt_libro_lrq_get_tipo_consumo($reclamo['tipo_consumo']) ?></label>
                             </fieldset>
                         </td>
                     </tr>
@@ -316,7 +316,7 @@ function libro_submenu_settings_ver()
     <?php
 }
 
-function libro_submenu_settings_general()
+function rt_libro_lrq_submenu_settings_general()
 {
     if ($_POST["btn_guardar_setting"]) {
         $page_libro_id = get_option('libro_setting_page');
@@ -416,10 +416,10 @@ function libro_submenu_settings_general()
     <?php
 }
 
-function libro_submenu_settings_callback()
+function rt_libro_lrq_submenu_settings_callback()
 {
-    if (current_user_can('manage_options')) {
-        ?>
+    if(current_user_can( 'manage_options' )){
+    ?>
     <div class="wrap woocommerce" >
         <div style="background-color:#87b43e;">
         </div>
@@ -439,20 +439,20 @@ function libro_submenu_settings_callback()
         <?php
         if ((!isset($_REQUEST['tab'])) || ($_REQUEST['tab'] == "home")) {
             if (isset($_REQUEST['ver']) || ($_REQUEST['ver'] > 0)) {
-                libro_submenu_settings_ver();
+                rt_libro_lrq_submenu_settings_ver();
             } else {
-                libro_submenu_settings_home();
+                rt_libro_lrq_submenu_settings_home();
             }
         }
-        if (($_REQUEST['tab'] == "setting")) {
-            libro_submenu_settings_general();
-        } ?>
+    if (($_REQUEST['tab'] == "setting")) {
+        rt_libro_lrq_submenu_settings_general();
+    } ?>
     </div>
     <?php
     }
 }
 
-function get_tipo_documentacion($id_tipo)
+function rt_libro_lrq_get_tipo_documentacion($id_tipo)
 {
     switch ($id_tipo) {
         case 1:
@@ -472,7 +472,7 @@ function get_tipo_documentacion($id_tipo)
     return $name;
 }
 
-function get_tipo_reclamacion($id_tipo)
+function rt_libro_lrq_get_tipo_reclamacion($id_tipo)
 {
     switch ($id_tipo) {
         case 1:
@@ -486,7 +486,7 @@ function get_tipo_reclamacion($id_tipo)
 }
 
 
-function get_tipo_consumo($id_tipo)
+function rt_libro_lrq_get_tipo_consumo($id_tipo)
 {
     switch ($id_tipo) {
         case 1:

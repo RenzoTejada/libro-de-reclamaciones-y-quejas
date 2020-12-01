@@ -1,15 +1,15 @@
 <?php
 
-function libro_setup()
+function rt_libro_lrq_setup()
 {
     $rt_libro_db_version = get_option('rt_libro_db_version');
     if (version_compare(Version_RT_Libro_Reclamaciones, $rt_libro_db_version) > 0) {
-        create_tables_default();
+        rt_libro_lrq_create_tables_default();
         update_option('rt_libro_db_version', Version_RT_Libro_Reclamaciones);
     }
 }
 
-function create_tables_default()
+function rt_libro_lrq_create_tables_default()
 {
     global $wpdb;
 
@@ -59,7 +59,7 @@ function create_tables_default()
     dbDelta($query_rt_libro);
 }
 
-function libro_errornoubigeoperu()
+function rt_libro_lrq_errornoubigeoperu()
 {
     ?>
     <div class="error notice">
