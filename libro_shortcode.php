@@ -22,6 +22,7 @@ function rt_libro_lrq_grabar_libro_reclamacion($libro_data)
     $table_name = $wpdb->prefix . "rt_libro";
     $wpdb->insert($table_name, $libro_data);
     $libro_id = $wpdb->insert_id;
+
     if ($libro_id) {
         rt_libro_lrq_enviar_mail_libro_reclamacion($libro_data);
     } else {

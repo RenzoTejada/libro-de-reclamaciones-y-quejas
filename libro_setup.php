@@ -3,22 +3,18 @@
 function rt_libro_lrq_setup()
 {
     $rt_libro_db_version = get_option('rt_libro_db_version');
-    if (version_compare(Version_RT_Libro_Reclamaciones, $rt_libro_db_version) > 0) {
-        rt_libro_lrq_create_tables_default();
-        update_option('rt_libro_db_version', Version_RT_Libro_Reclamaciones);
-    }
+    rt_libro_lrq_create_tables_default();
+    update_option('rt_libro_db_version', Version_RT_Libro_Reclamaciones);
 }
 
 function rt_libro_lrq_create_tables_default()
 {
-    global $wpdb;
-
-    $charset_collate = $wpdb->get_charset_collate();
-
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
     
+    $table_libro = $wpdb->prefix . "rt_libro";
     $query_rt_libro = "
-        CREATE TABLE IF NOT EXISTS " . $wpdb->prefix . "rt_libro (
+        CREATE TABLE IF NOT EXISTS $table_libro (
             `libro_id` int(11) NOT NULL AUTO_INCREMENT,
             `nombre` varchar(100) DEFAULT NULL,
             `apellido_paterno` varchar(100) DEFAULT NULL,
@@ -55,8 +51,9 @@ function rt_libro_lrq_create_tables_default()
             `estado` int(5) DEFAULT NULL,
             `url_adjunto` varchar(250) DEFAULT NULL,
             PRIMARY KEY (`libro_id`)
-        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=$charset_collate";
+        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
     dbDelta($query_rt_libro);
+    
 }
 
 function rt_libro_lrq_errornoubigeoperu()
