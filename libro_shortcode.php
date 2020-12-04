@@ -6,7 +6,7 @@ function rt_libro_lrq_reclamacion_template($template)
 {
     $page_libro_id = get_option('libro_setting_page');
     if (is_page($page_libro_id)) {
-        $template = WP_PLUGIN_DIR . '/libro-de-reclamaciones-y-quejas/template/full-template.php';
+        $template = WP_PLUGIN_DIR . '/libro-de-reclamaciones-y-quejas/template/rt-libro-lrq-full-template.php';
     }
     return $template;
 }

@@ -50,3 +50,12 @@ e.g.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 1. Use the Settings->Plugin Name screen to configure the plugin
 1. (Make your instructions match the desired user flow for activating and installing your plugin. Include any steps that might be needed for explanatory purposes)
+
+
+== Changelog ==
+
+= 0.0.2 =
+Rename del template para evitar conflictos con los templates de los diferentes temas en wp.
+
+= 0.0.1 =
+Versión de lanzamiento del plugin Libro de Reclamaciones y Quejas.
