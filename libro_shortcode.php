@@ -256,8 +256,8 @@ function rt_libro_lrq_html_form_libro_reclamacion()
                         <option value="2">'.__('Service', 'rt-libro').'</option>
                     </select>
                 </div>
-                <div class="column-half">'.__('Order No.', 'rt-libro').' <b class="alert">*</b>
-                    <input type="text" name="nro_pedido" value="" size="40" placeholder="Nº Pedido" class="required">
+                <div class="column-half">'.__('Order No.', 'rt-libro').'<b class="alert">*</b>
+                    <input type="text" name="nro_pedido" value="" size="40" placeholder="'.__('Order No.', 'rt-libro').'" class="required">
                 </div>
             </div>
             <div class="form-row-libro">
