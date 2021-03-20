@@ -54,6 +54,9 @@ e.g.
 
 == Changelog ==
 
+= 0.1.0 =
+Correciones de notice en el admin y en la vista de libro de reclamaciones del shortcode.
+
 = 0.0.2 =
 Rename del template para evitar conflictos con los templates de los diferentes temas en wp.
 

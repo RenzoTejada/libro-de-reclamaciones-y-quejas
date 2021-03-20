@@ -60,7 +60,7 @@ function rt_libro_lrq_view_page()
         global $rpt;
         global $libro_id;
         $rpt = 3;
-        if ($_POST['guardar_libro_reclamacion']) {
+        if (isset($_POST['guardar_libro_reclamacion'])) {
             $libro_data = array(
                 'nombre' => sanitize_text_field($_POST['nombres']),
                 'apellido_paterno' => sanitize_text_field($_POST['paterno']),
@@ -256,8 +256,8 @@ function rt_libro_lrq_html_form_libro_reclamacion()
                         <option value="2">'.__('Service', 'rt-libro').'</option>
                     </select>
                 </div>
-                <div class="column-half">'.__('Order No.', 'rt-libro').'<b class="alert">*</b>
-                    <input type="text" name="nro_pedido" value="" size="40" placeholder="'.__('Order No.', 'rt-libro').'" class="required">
+                <div class="column-half">'.__('Order No.', 'rt-libro').' <b class="alert">*</b>
+                    <input type="text" name="nro_pedido" value="" size="40" placeholder="Nº Pedido" class="required">
                 </div>
             </div>
             <div class="form-row-libro">

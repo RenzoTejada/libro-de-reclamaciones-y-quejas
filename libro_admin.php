@@ -318,23 +318,32 @@ function rt_libro_lrq_submenu_settings_ver()
 
 function rt_libro_lrq_submenu_settings_general()
 {
-    if ($_POST["btn_guardar_setting"]) {
+    if (isset($_POST["btn_guardar_setting"])) {
         $page_libro_id = get_option('libro_setting_page');
         $page_libro_url = get_option('libro_setting_url');
         if ($page_libro_id) {
             update_option('libro_setting_page', sanitize_text_field($_POST["page_libro"]));
         } else {
             add_option('libro_setting_page', sanitize_text_field($_POST["page_libro"]));
+            $page_libro_id = get_option('libro_setting_page');
+            if(!$page_libro_id){
+                update_option('libro_setting_page', sanitize_text_field($_POST["page_libro"]));
+            }
         }
         if ($page_libro_url) {
             update_option('libro_setting_url', sanitize_text_field($_POST["url_libro"]));
         } else {
             add_option('libro_setting_url', sanitize_text_field($_POST["url_libro"]));
+            $page_libro_url = get_option('libro_setting_url');
+            if(!$page_libro_url){
+                update_option('libro_setting_url', sanitize_text_field($_POST["url_libro"]));
+            }
         }
     }
 
     $page_libro_id = get_option('libro_setting_page');
-    $page_libro_url = get_option('libro_setting_url'); ?>
+    $page_libro_url = get_option('libro_setting_url');
+    ?>
     <script>
         function copiarShortcode(id_elemento) {
             var aux = document.createElement("input");
@@ -438,13 +447,13 @@ function rt_libro_lrq_submenu_settings_callback()
         </h2>
         <?php
         if ((!isset($_REQUEST['tab'])) || ($_REQUEST['tab'] == "home")) {
-            if (isset($_REQUEST['ver']) || ($_REQUEST['ver'] > 0)) {
+            if (isset($_REQUEST['ver']) > 0) {
                 rt_libro_lrq_submenu_settings_ver();
             } else {
                 rt_libro_lrq_submenu_settings_home();
             }
         }
-    if (($_REQUEST['tab'] == "setting")) {
+    if (isset($_REQUEST['tab']) == "setting") {
         rt_libro_lrq_submenu_settings_general();
     } ?>
     </div>
