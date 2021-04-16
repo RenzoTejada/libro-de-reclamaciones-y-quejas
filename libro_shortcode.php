@@ -31,6 +31,26 @@ function rt_libro_lrq_grabar_libro_reclamacion($libro_data)
     return $libro_id;
 }
 
+function rt_libro_lrq_get_type_doc($tipo_doc)
+{
+    $nombre_tipo_doc = '';
+    switch ($tipo_doc){
+        case 1:
+            $nombre_tipo_doc = "DNI";
+            break;
+        case 2:
+            $nombre_tipo_doc = "CE";
+            break;
+        case 3:
+            $nombre_tipo_doc = "Passport";
+            break;
+        case 4:
+            $nombre_tipo_doc = "RUC";
+            break;
+    }
+    return $nombre_tipo_doc;
+}
+
 function rt_libro_lrq_enviar_mail_libro_reclamacion($libro_data)
 {
     // Email para el administradora
@@ -41,6 +61,38 @@ function rt_libro_lrq_enviar_mail_libro_reclamacion($libro_data)
     $mailResult = wp_mail(get_option('admin_email'), $subject, $message, $headers);
     // Email para el usuario
     $message_user = __('Dear:', 'rt-libro') . " " ." {$libro_data['nombre']}  {$libro_data['apellido_paterno']} ,\r\n\r\n".__('Thank you very much for leaving us your opinion about our services.', 'rt-libro')."\r\n\r\n".__('Your claim has been successfully received.', 'rt-libro');
+    $message_user .= "\r\n\r\n".__('Name', 'rt-libro') .": ". $libro_data['nombre'];
+    $message_user .= "\r\n\r\n".__('First Lastname', 'rt-libro') .": ". $libro_data['apellido_paterno'];
+    $message_user .= "\r\n\r\n".__('Second Lastname', 'rt-libro') .": ". $libro_data['apellido_materno'];
+    $message_user .= "\r\n\r\n".__('Type of documentation', 'rt-libro') .": ". rt_libro_lrq_get_type_doc($libro_data['tipo_doc']);
+    $message_user .= "\r\n\r\n".__('Documentation number', 'rt-libro') .": ". $libro_data['nro_documento'];
+    $message_user .= "\r\n\r\n".__('Celphone', 'rt-libro') .": ". $libro_data['fono'];
+    $message_user .= "\r\n\r\n".__('Department', 'rt-libro') .": ". $libro_data['departamento'];
+    $message_user .= "\r\n\r\n".__('Province', 'rt-libro') .": ". $libro_data['provincia'];
+    $message_user .= "\r\n\r\n".__('District', 'rt-libro') .": ". $libro_data['distrito'];
+    $message_user .= "\r\n\r\n".__('Address', 'rt-libro') .": ". $libro_data['direccion'];
+    $message_user .= "\r\n\r\n".__('Reference', 'rt-libro') .": ". $libro_data['referencia'];
+    $message_user .= "\r\n\r\n".__('Email', 'rt-libro') .": ". $libro_data['email'];
+    $message_user .= "\r\n\r\n".__('Are you a minor?', 'rt-libro') .": ". ($libro_data['flag_menor'] == '1' ? __('Yes', 'rt-libro') : __('No', 'rt-libro'));
+    if($libro_data['flag_menor']){
+        $message_user .= "\r\n\r\n".__('Name of tutor', 'rt-libro') .": ". $libro_data['nombre_tutor'];
+        $message_user .= "\r\n\r\n".__('Email of tutor', 'rt-libro') .": ". $libro_data['email_tutor'];
+        $message_user .= "\r\n\r\n".__('Type of documentation of tutor', 'rt-libro') .": ". rt_libro_lrq_get_type_doc($libro_data['tipo_doc_tutor']);
+        $message_user .= "\r\n\r\n".__('Number of document of tutor', 'rt-libro') .": ". $libro_data['numero_documento_tutor'];
+    }
+    $message_user .= "\r\n\r\n".__('Claim Type', 'rt-libro') .": ". ($libro_data['tipo_reclamacion'] == 1 ? __('Claim', 'rt-libro') : __('Complain', 'rt-libro'));
+    $message_user .= "\r\n\r\n".__('Type of consumption', 'rt-libro') .": ". ($libro_data['tipo_consumo']==1 ? __('Product', 'rt-libro') : __('Service', 'rt-libro'));
+    $message_user .= "\r\n\r\n".__('Order No.', 'rt-libro') .": ". $libro_data['nro_pedido'];
+    $message_user .= "\r\n\r\n".__('Claim / complaint date', 'rt-libro') .": ". date("d/m/Y", strtotime($libro_data['fch_reclamo']));
+    $message_user .= "\r\n\r\n".__('Provider', 'rt-libro') .": ". $libro_data['proveedor'];
+    $message_user .= "\r\n\r\n".__('Reclaimed amount', 'rt-libro') .": ". $libro_data['monto_reclamado'];
+    $message_user .= "\r\n\r\n".__('Description of the product or service', 'rt-libro') .": ". $libro_data['descripcion'];
+    $message_user .= "\r\n\r\n".__('Date of purchase', 'rt-libro') .": ". date("d/m/Y", strtotime($libro_data['fch_compra']));
+    $message_user .= "\r\n\r\n".__('Date of Consumption', 'rt-libro') .": ". date("d/m/Y", strtotime($libro_data['fch_consumo']));
+    $message_user .= "\r\n\r\n".__('Expiration date', 'rt-libro') .": " . date("d/m/Y", strtotime($libro_data['fch_vencimiento']));
+    $message_user .= "\r\n\r\n".__('Detail of the Claim / Complaint, as indicated by the client', 'rt-libro') .": ". $libro_data['detalle'];
+    $message_user .= "\r\n\r\n".__('Client order', 'rt-libro') .": ". $libro_data['pedido_cliente'];
+
     $message_user .= "\r\n\r\n".__('Atte.', 'rt-libro')." \r\n\r\n". get_option('blogname');
     $headers = __('From: ', 'rt-libro') .' '. get_option('blogname') . ' <'.get_option('admin_email').'>' . "\r\n";
     wp_mail($libro_data['email'], __('We have received your claim', 'rt-libro'), $message_user, $headers);
