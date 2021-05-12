@@ -12,11 +12,21 @@ Libro de reclamaciones válido para Perú con los campos obligatorios exigidos p
 
 == Description ==
 
-* Le envia un email al cliente con una copia de su reclamo.
-* Le envia un email al administrador del site con el reclamo.
-* El administrador de la pagina web no puede borrar ni editar la informacion enviada por el cliente.
-* El plugin "Libro de Reclamaciones" genera un ID unico correlativo en la Base de Datos que dificulta su modificacion y edicion.
-* Todos los reclamos son vistos en el mismo panel de control de WordPress de una manera clara.
+* Email the customer with a copy of their complaint.
+* You send an email to the site administrator with the complaint.
+* The site administrator cannot delete or edit the information sent by the customer.
+* The "Complaint Book" plugin generates a unique correlative ID in the database which makes it difficult to modify and edit.
+* All complaints are viewed in the same WordPress dashboard in a clear way.
+
+We also have a premium plugin which has the following features: 
+
+* The plugin generates a unique correlative ID in the database which makes it difficult to modify and edit. 
+* All complaints are seen in the same WordPress dashboard in a clear way. 
+* You will be able to answer the claim or complaint from the same WordPress dashboard.
+* You will be able to attach evidence of the complaint from within the WordPress dashboard. You will be able to activate Google reCaptcha v2.
+* You will be able to change the email to notify when a complaint is created. 
+
+More information about the plugin in [Libro de Reclamaciones y Quejas PRO](https://renzotejada.com/plugin/libro-de-reclamaciones-y-quejas-pro/ "Libro de Reclamaciones y Quejas PRO")
 
 
 == Installation ==
@@ -53,6 +63,9 @@ e.g.
 
 
 == Changelog ==
+
+= 0.1.2 (12/05/2021) =
+Validado en la versión WC 5.3.0
 
 = 0.1.1 =
 Agregando la copia del formulario en el email.
