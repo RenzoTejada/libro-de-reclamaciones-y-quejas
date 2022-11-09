@@ -80,6 +80,7 @@ Instalación manual de FTP
 = 0.1.6 (09/11/2022) =
 Fix: validando versión WC 7.1
 Fix: validando versión WP 6.1
+Fix: Cambiando el texto de libro de 30 dias a 15 dias de contestación.
 
 = 0.1.5 (16/05/2022) =
 Fix: validando versión WC 6.5.1
