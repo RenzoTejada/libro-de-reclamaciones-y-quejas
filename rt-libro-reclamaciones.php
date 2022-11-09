@@ -18,7 +18,7 @@
  * Domain Path:     /language
  * Requires at least: 5.6
  * Requires PHP:      5.6.20
- * WC tested up to:   7.0.1
+ * WC tested up to:   7.1
  * WC requires at least: 2.6
  */
 if (!defined('ABSPATH')) {

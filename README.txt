@@ -78,7 +78,7 @@ Instalación manual de FTP
 == Changelog ==
 
 = 0.1.6 (09/11/2022) =
-Fix: validando versión WC 7.0.1
+Fix: validando versión WC 7.1
 Fix: validando versión WP 6.1
 
 = 0.1.5 (16/05/2022) =

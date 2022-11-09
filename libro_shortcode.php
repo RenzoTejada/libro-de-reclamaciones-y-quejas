@@ -365,7 +365,7 @@ function rt_libro_lrq_html_form_libro_reclamacion()
                 </div>
                 <div class="column-two" style="font-size:10px">
                 <b class="alert">*</b> '.__('The formulation of the claim does not preclude resorting to other means of dispute resolution nor is it a prerequisite for filing a complaint with Indecopi.', 'rt-libro').' <br>
-                <b class="alert">*</b> '.__('The provider must respond to the claim within a period of no more than thirty (30) calendar days, being able to extend the period up to thirty days.', 'rt-libro').'<br>
+                <b class="alert">*</b> '.__('The provider must respond to the claim within a period of no more than fifteen (15) calendar days, being able to extend the period up to fifteen days.', 'rt-libro').'<br>
                 <b class="alert">*</b> '.__('By signing this document, the client authorizes to be contacted after the claim has been dealt with in order to evaluate the quality and satisfaction with the claims service process.', 'rt-libro').' 
                 </div>
             </div>
