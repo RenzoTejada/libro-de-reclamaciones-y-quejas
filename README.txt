@@ -2,7 +2,7 @@
 Contributors: renzotejada, drplugins
 Tags: libro de reclamaciones, libro de reclamaciones peru, libro de reclamaciones wordpress, libro de reclamaciones plugin
 Requires at least: 5.2
-Tested up to: 6.1
+Tested up to: 6.1.1
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -50,6 +50,7 @@ For additional functionality, check out our companion plugin, such as:
 * [WooPlin para WooCommerce](https://renzotejada.com/plugin/wooplin-para-woocommerce/)
 * [WooTunki para WooCommerce](https://renzotejada.com/plugin/wootunki-para-woocommerce/)
 * [WooBilletera para WooCommerce](https://renzotejada.com/plugin/woobilletera-para-woocommerce/)
+* [Comprobante de Pago Perú PRO para WooCommerce](https://renzotejada.com/plugins/comprobante-de-pago-peru-pro-para-woocommerce/)
 
 
 Visit our [plugins overview page](https://renzotejada.com/categoria-producto/plugins/) for more information.
@@ -76,6 +77,10 @@ Instalación manual de FTP
 
 
 == Changelog ==
+
+= 0.1.7 (06/12/2022) =
+Fix: validando versión WC 7.1.0
+Fix: validando versión WP 6.1.1
 
 = 0.1.6 (09/11/2022) =
 Fix: validando versión WC 7.1
