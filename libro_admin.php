@@ -44,6 +44,9 @@ function rt_libro_lrq_submenu_settings_home()
     <h2></h2>
     <?php
     $listado = rt_libro_lrq_get_all_reclamos(1);
+    $wp_upload_dir = wp_upload_dir() ;
+    $upload_dir = $wp_upload_dir['basedir'] . '/libro-pdfs/libro-';
+    $upload_url = $wp_upload_dir['baseurl'] . '/libro-pdfs/libro-';
 
     if ($listado) {
         print "<table class='wc-shipping-zones widefat'>";
@@ -59,6 +62,7 @@ function rt_libro_lrq_submenu_settings_home()
         print "<th style='text-align:center'>".__('Claim detail', 'rt-libro')."</th>";
         print "<th style='text-align:center'>".__('Clients order', 'rt-libro')."</th>";
         print "<th style='text-align:center'>".__('Reclaimed amount', 'rt-libro')."</th>";
+        print "<th style='text-align:center'>".__('PDF', 'rt-libro')."</th>";
         print "</tr>";
         print "</thead>";
         print "<tbody>";
@@ -75,6 +79,11 @@ function rt_libro_lrq_submenu_settings_home()
             print "<td style='text-align:center'><button class='button button-primary' onclick=\"jQuery('#detallesolicitud_texto').val('" . str_replace("\r", "", str_replace("\n", '\n', str_replace('"', '&quot;', str_replace("'", '\x27', $row['detalle'])))) . "');jQuery('#detallesolicitud').show();\">Ver</button></td>";
             print "<td style='text-align:center'><button class='button button-primary' onclick=\"jQuery('#detallesolicitud_texto').val('" . str_replace("\r", "", str_replace("\n", '\n', str_replace('"', '&quot;', str_replace("'", '\x27', $row['pedido_cliente'])))) . "');jQuery('#detallesolicitud').show();\">Ver</button></td>";
             print "<td style='text-align:center'>" . $row['monto_reclamado'] . "</td>";
+            if(file_exists($upload_dir . $row['libro_id'] .'.pdf')){
+                print "<td style='text-align:center'><a href='" . $upload_url . $row['libro_id'] . ".pdf' target='_blank'>PDF</a></td>";
+            } else {
+                print "<td style='text-align:center'></td>";
+            }
             print "</tr>";
         }
         print "</tbody>";
@@ -436,7 +445,7 @@ function rt_libro_lrq_submenu_settings_callback()
         <hr>
 
         <h2 class="nav-tab-wrapper">
-            <a href="?page=libro_settings&tab=home" class="nav-tab <?php
+            <a href="?page=libro_settings" class="nav-tab <?php
             if ((!isset($_REQUEST['tab'])) || ($_REQUEST['tab'] == "home")) {
                 print " nav-tab-active";
             } ?>"><?php _e('List', 'rt-libro') ?></a>

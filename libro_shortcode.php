@@ -1,4 +1,11 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit;
+}
+require 'vendor/autoload.php';
+
+use Dompdf\Dompdf;
+
 add_filter('template_include', 'rt_libro_lrq_reclamacion_template');
 
 // Page template filter callback
@@ -24,7 +31,8 @@ function rt_libro_lrq_grabar_libro_reclamacion($libro_data)
     $libro_id = $wpdb->insert_id;
 
     if ($libro_id) {
-        rt_libro_lrq_enviar_mail_libro_reclamacion($libro_data);
+        $filepath = rt_libro_lrq_crear_pdf_libro_reclamacion($libro_data, $libro_id);
+        rt_libro_lrq_enviar_mail_libro_reclamacion($libro_data, $libro_id, $filepath);
     } else {
         $libro_id = 0;
     }
@@ -51,16 +59,29 @@ function rt_libro_lrq_get_type_doc($tipo_doc)
     return $nombre_tipo_doc;
 }
 
-function rt_libro_lrq_enviar_mail_libro_reclamacion($libro_data)
+function rt_libro_lrq_crear_pdf_libro_reclamacion($libro_data, $libro_id)
 {
-    // Email para el administradora
-    $subject = __('Claim sent from', 'rt-libro') .' ' . get_option('blogname');
-    $subject = __('Claims Book Registry', 'rt-libro');
-    $message = __('A new complaint / complaint was registered.', 'rt-libro');
-    $headers = __('From: ', 'rt-libro') .' '. $libro_data['nombre'] . ' <' . $libro_data['email'] . '>' . "\r\n";
-    $mailResult = wp_mail(get_option('admin_email'), $subject, $message, $headers);
-    // Email para el usuario
+    $dompdf = new Dompdf();
+    $wp_upload_dir = wp_upload_dir() ;
+    $upload_dir = $wp_upload_dir['basedir'] . '/libro-pdfs';
+    ob_start();
+    include ( WP_PLUGIN_DIR . '/libro-de-reclamaciones-y-quejas/template/rt-libro-pdf.php');
+    $view = ob_get_contents();
+    ob_get_clean();
+    $dompdf->loadHtml($view);
+    $dompdf->render();
+    $pdf = $dompdf->output();
+    wp_mkdir_p($upload_dir);
+    $filename = $upload_dir . '/libro-' . $libro_id . ".pdf";
+    file_put_contents($filename, $pdf);
+    return $filename;
+}
+
+function rt_libro_lrq_enviar_mail_libro_reclamacion($libro_data, $libro_id, $filename)
+{
+    // Email para el usuario y admin
     $message_user = __('Dear:', 'rt-libro') . " " ." {$libro_data['nombre']}  {$libro_data['apellido_paterno']} ,\r\n\r\n".__('Thank you very much for leaving us your opinion about our services.', 'rt-libro')."\r\n\r\n".__('Your claim has been successfully received.', 'rt-libro');
+    $message_user .= "\r\n\r\n".__('Nro', 'rt-libro') .":  00". $libro_id;
     $message_user .= "\r\n\r\n".__('Name', 'rt-libro') .": ". $libro_data['nombre'];
     $message_user .= "\r\n\r\n".__('First Lastname', 'rt-libro') .": ". $libro_data['apellido_paterno'];
     $message_user .= "\r\n\r\n".__('Second Lastname', 'rt-libro') .": ". $libro_data['apellido_materno'];
@@ -94,8 +115,9 @@ function rt_libro_lrq_enviar_mail_libro_reclamacion($libro_data)
     $message_user .= "\r\n\r\n".__('Client order', 'rt-libro') .": ". $libro_data['pedido_cliente'];
 
     $message_user .= "\r\n\r\n".__('Atte.', 'rt-libro')." \r\n\r\n". get_option('blogname');
-    $headers = __('From: ', 'rt-libro') .' '. get_option('blogname') . ' <'.get_option('admin_email').'>' . "\r\n";
-    wp_mail($libro_data['email'], __('We have received your claim', 'rt-libro'), $message_user, $headers);
+    $headers[] = __('From: ', 'rt-libro') .' '. get_option('blogname') . ' <'.get_option('admin_email').'>' . "\r\n";
+    $headers[] = 'Cc: <'.get_option('admin_email').'>' . "\r\n";
+    wp_mail($libro_data['email'], __('We have received your claim', 'rt-libro'), $message_user, $headers,$filename);
 }
 
 function rt_libro_lrq_view_page()
