@@ -2,7 +2,7 @@
 Contributors: renzotejada, alexistejada
 Tags: libro de reclamaciones, libro de reclamaciones peru, libro de reclamaciones wordpress, libro de reclamaciones plugin
 Requires at least: 5.2
-Tested up to: 6.4.3
+Tested up to: 6.5
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv2 or later
@@ -77,6 +77,10 @@ Instalación manual de FTP
 
 
 == Changelog ==
+
+= 0.2.0 (04/04/2024) =
+Fix: validando versión WC 8.7.0
+Fix: validando versión WP 6.5
 
 = 0.1.9 (22/03/2024) =
 Fix: validando versión WC 8.7.0

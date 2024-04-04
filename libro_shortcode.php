@@ -171,6 +171,7 @@ function rt_libro_lrq_view_page()
             );
             $libro_id = rt_libro_lrq_grabar_libro_reclamacion($libro_data);
         }
+
         $html .= '
         <div class="wrapper claim-wong center">
             <div class="content">
