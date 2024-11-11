@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Libro de Reclamaciones y Quejas\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-25 03:44+0000\n"
-"PO-Revision-Date: 2022-11-09 17:35+0000\n"
+"PO-Revision-Date: 2024-11-11 00:24+0000\n"
 "Last-Translator: \n"
 "Language-Team: Español\n"
 "Language: es_ES\n"
@@ -14,35 +14,31 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.4.6; wp-5.5.3"
 
-#: libro_shortcode.php:59
-msgid "A new complaint / complaint was registered."
-msgstr "Se registró una nueva queja / queja."
-
-#: libro_admin.php:52
+#: libro_admin.php:55
 msgid "Action"
 msgstr "Acción"
 
-#: libro_admin.php:363
+#: libro_admin.php:372
 msgid "Add the following shortcode"
 msgstr "Agrega el siguiente código corto"
 
-#: libro_shortcode.php:73 libro_shortcode.php:242 libro_shortcode.php:243
+#: libro_shortcode.php:94 libro_shortcode.php:265 libro_shortcode.php:266
 msgid "Address"
 msgstr "Dirección"
 
-#: libro_admin.php:371
+#: libro_admin.php:380
 msgid "Administration email address"
 msgstr "Dirección de correo electrónico de administración"
 
-#: libro_shortcode.php:76 libro_shortcode.php:256
+#: libro_shortcode.php:97 libro_shortcode.php:279
 msgid "Are you a minor?"
 msgstr "¿Eres menor de edad?"
 
-#: libro_shortcode.php:96
+#: libro_shortcode.php:117
 msgid "Atte."
 msgstr "Atte."
 
-#: libro_shortcode.php:369
+#: libro_shortcode.php:392
 msgid ""
 "By signing this document, the client authorizes to be contacted after the "
 "claim has been dealt with in order to evaluate the quality and satisfaction "
@@ -52,118 +48,110 @@ msgstr ""
 "de la tramitación de la reclamación para evaluar la calidad y satisfacción "
 "del proceso de atención de reclamaciones."
 
-#: libro_admin.php:471 libro_shortcode.php:209 libro_shortcode.php:281
+#: libro_admin.php:479 libro_shortcode.php:232 libro_shortcode.php:304
 msgid "CE"
 msgstr "CE"
 
-#: libro_admin.php:56 libro_admin.php:146 libro_shortcode.php:69
-#: libro_shortcode.php:217
+#: libro_admin.php:59 libro_admin.php:155 libro_shortcode.php:90
+#: libro_shortcode.php:240
 msgid "Celphone"
 msgstr "Celular"
 
-#: libro_admin.php:378
+#: libro_admin.php:387
 msgid "Choose page for complaint book"
 msgstr "Elija la página para el libro de quejas"
 
-#: libro_admin.php:488 libro_shortcode.php:83 libro_shortcode.php:300
-#: libro_shortcode.php:357
+#: libro_admin.php:496 libro_shortcode.php:104 libro_shortcode.php:323
+#: libro_shortcode.php:380 template/rt-libro-pdf.php:203
 msgid "Claim"
 msgstr "Reclamación"
 
-#: libro_shortcode.php:86 libro_shortcode.php:316
+#: libro_shortcode.php:107 libro_shortcode.php:339
 msgid "Claim / complaint date"
 msgstr "Fecha de reclamación / queja"
 
-#: libro_admin.php:100
+#: libro_admin.php:109
 msgid "Claim / Complaint Nro"
 msgstr " Nro Reclamación / Queja"
 
-#: libro_admin.php:244
+#: libro_admin.php:253
 msgid "Claim date"
 msgstr "Fecha de reclamación"
 
-#: libro_admin.php:59 libro_admin.php:290
+#: libro_admin.php:62 libro_admin.php:299
 msgid "Claim detail"
 msgstr "Detalle de reclamo"
 
-#: libro_shortcode.php:57
-msgid "Claim sent from"
-msgstr "Reclamo enviado desde"
-
-#: libro_shortcode.php:83 libro_shortcode.php:297 libro_shortcode.php:299
+#: libro_shortcode.php:104 libro_shortcode.php:320 libro_shortcode.php:322
 msgid "Claim Type"
 msgstr "Tipo de reclamo"
 
-#: libro_admin.php:220
+#: libro_admin.php:229
 msgid "Claim type"
 msgstr "Tipo de reclamo"
 
-#: libro_admin.php:435
+#: libro_admin.php:444
 msgid "Claims and Complaints Book"
 msgstr "Libro de reclamaciones y quejas"
 
-#: libro_shortcode.php:58
-msgid "Claims Book Registry"
-msgstr "Registro del libro de reclamaciones"
-
-#: libro_admin.php:296 libro_shortcode.php:94 libro_shortcode.php:351
+#: libro_admin.php:305 libro_shortcode.php:115 libro_shortcode.php:374
 msgid "Client order"
 msgstr "Pedido del Cliente"
 
-#: libro_admin.php:60
+#: libro_admin.php:63
 msgid "Clients order"
 msgstr "Pedidos del cliente"
 
-#: libro_admin.php:491 libro_shortcode.php:83 libro_shortcode.php:301
-#: libro_shortcode.php:358
+#: libro_admin.php:499 libro_shortcode.php:104 libro_shortcode.php:324
+#: libro_shortcode.php:381 template/rt-libro-pdf.php:203
 msgid "Complain"
 msgstr "Queja"
 
-#: libro_shortcode.php:190
+#: libro_shortcode.php:213
 msgid "Complaining Consumer Identification"
 msgstr "Identificación del consumidor reclamante"
 
-#: libro_admin.php:274
+#: libro_admin.php:283
 msgid "Consumption date"
 msgstr "Fecha de consumo"
 
-#: libro_admin.php:366
+#: libro_admin.php:375
 msgid "Copy"
 msgstr "Copiar"
 
-#: libro_shortcode.php:91 libro_shortcode.php:336
+#: libro_shortcode.php:112 libro_shortcode.php:359
 msgid "Date of Consumption"
 msgstr "Fecha de consumo"
 
-#: libro_admin.php:266 libro_shortcode.php:90 libro_shortcode.php:333
+#: libro_admin.php:275 libro_shortcode.php:111 libro_shortcode.php:356
 msgid "Date of purchase"
 msgstr "Fecha de compra"
 
-#: libro_shortcode.php:63
+#: libro_shortcode.php:83
 msgid "Dear:"
 msgstr "Estimado:"
 
-#: libro_admin.php:162 libro_shortcode.php:70 libro_shortcode.php:222
+#: libro_admin.php:171 libro_shortcode.php:91 libro_shortcode.php:245
 msgid "Department"
 msgstr "Departamento"
 
-#: libro_shortcode.php:89 libro_shortcode.php:328
+#: libro_shortcode.php:110 libro_shortcode.php:351
 msgid "Description of the product or service"
 msgstr "Descripción del producto o servicio"
 
-#: libro_admin.php:40 libro_admin.php:90
+#: libro_admin.php:40 libro_admin.php:99
 msgid "Detail"
 msgstr "Detalle"
 
-#: libro_shortcode.php:93 libro_shortcode.php:345
+#: libro_shortcode.php:114 libro_shortcode.php:368
 msgid "Detail of the Claim / Complaint, as indicated by the client"
 msgstr "Detalle de la Reclamación / Queja, según lo indicado por el cliente"
 
-#: libro_shortcode.php:294
+#: libro_shortcode.php:317
 msgid "Detail of the Claim and Consumer Order"
 msgstr "Detalle del reclamo y orden del consumidor"
 
-#: libro_shortcode.php:358
+#: libro_shortcode.php:381
 msgid ""
 "Disagreement not related to products and / or services; or, discomfort or "
 "dissatisfaction with the attention to the public."
@@ -171,57 +159,57 @@ msgstr ""
 "Desacuerdo no relacionado con productos y / o servicios; o, malestar o "
 "insatisfacción con la atención al público."
 
-#: libro_shortcode.php:357
+#: libro_shortcode.php:380
 msgid "Disagreement related to products and / or services."
 msgstr "Desacuerdo relacionado con productos y / o servicios."
 
-#: libro_admin.php:178 libro_shortcode.php:72 libro_shortcode.php:235
+#: libro_admin.php:187 libro_shortcode.php:93 libro_shortcode.php:258
 msgid "District"
 msgstr "Distrito"
 
-#: libro_admin.php:468 libro_shortcode.php:208 libro_shortcode.php:280
+#: libro_admin.php:476 libro_shortcode.php:231 libro_shortcode.php:303
 msgid "DNI"
 msgstr "DNI"
 
-#: libro_admin.php:138 libro_admin.php:211 libro_shortcode.php:68
-#: libro_shortcode.php:214 libro_shortcode.php:215 libro_shortcode.php:218
+#: libro_admin.php:147 libro_admin.php:220 libro_shortcode.php:89
+#: libro_shortcode.php:237 libro_shortcode.php:238 libro_shortcode.php:241
 msgid "Documentation number"
 msgstr "Número de documentación"
 
-#: libro_admin.php:57 libro_admin.php:154 libro_shortcode.php:75
-#: libro_shortcode.php:248 libro_shortcode.php:249 libro_shortcode.php:272
-#: libro_shortcode.php:273
+#: libro_admin.php:60 libro_admin.php:163 libro_shortcode.php:96
+#: libro_shortcode.php:271 libro_shortcode.php:272 libro_shortcode.php:295
+#: libro_shortcode.php:296
 msgid "Email"
 msgstr "Correo electrónico"
 
-#: libro_admin.php:195 libro_shortcode.php:79
+#: libro_admin.php:204 libro_shortcode.php:100
 msgid "Email of tutor"
 msgstr "Email del tutor"
 
-#: libro_admin.php:282 libro_shortcode.php:92 libro_shortcode.php:339
+#: libro_admin.php:291 libro_shortcode.php:113 libro_shortcode.php:362
 msgid "Expiration date"
 msgstr "Fecha de caducidad"
 
-#: libro_shortcode.php:266
+#: libro_shortcode.php:289
 msgid "Father / Mother / Tutor"
 msgstr "Padre / Madre / Tutor"
 
-#: libro_admin.php:54 libro_admin.php:114
+#: libro_admin.php:57 libro_admin.php:123
 msgid "First last name"
 msgstr "Primer apellido"
 
-#: libro_shortcode.php:65 libro_shortcode.php:197 libro_shortcode.php:198
+#: libro_shortcode.php:86 libro_shortcode.php:220 libro_shortcode.php:221
 msgid "First Lastname"
 msgstr "Primer apellido"
 
-#: libro_shortcode.php:60 libro_shortcode.php:97
+#: libro_shortcode.php:118
 #| msgid "From:"
 msgid "From: "
 msgstr "Desde:"
 
-#: libro_admin.php:357
+#: libro_admin.php:366
 msgid "General setting"
-msgstr "Ajuste Genrales"
+msgstr "Ajustes Generales"
 
 #. Author URI of the plugin
 msgid "https://renzotejada.com/"
@@ -231,15 +219,15 @@ msgstr "https://renzotejada.com/"
 msgid "https://renzotejada.com/libro-de-reclamaciones-y-quejas/"
 msgstr "https://renzotejada.com/libro-de-reclamaciones-y-quejas/"
 
-#: libro_admin.php:310
+#: libro_admin.php:319
 msgid "I accept the content"
 msgstr "Acepto el contenido"
 
-#: libro_admin.php:311
+#: libro_admin.php:320
 msgid "I accept the Privacy and Security Policy"
 msgstr "Acepto la Política de privacidad y seguridad"
 
-#: libro_shortcode.php:364
+#: libro_shortcode.php:387
 msgid ""
 "I declare that I am the owner of the service and I accept the content of "
 "this form by stating under an Affidavit the veracity of the facts described."
@@ -248,7 +236,7 @@ msgstr ""
 "formulario al declarar bajo Declaración Jurada la veracidad de los hechos "
 "descritos."
 
-#: libro_shortcode.php:375
+#: libro_shortcode.php:398
 msgid ""
 "I have read and accept the Privacy and Security Policy and the Cookies "
 "Policy."
@@ -272,31 +260,35 @@ msgstr ""
 "Libro de Reclamaciones y Quejas: El módulo necesita tener instalado Ubigeo "
 "de Perú para funcionar correctamente."
 
-#: libro_admin.php:442
+#: libro_admin.php:451
 msgid "List"
 msgstr "Listado"
 
-#: libro_admin.php:53 libro_admin.php:106 libro_shortcode.php:64
-#: libro_shortcode.php:194 libro_shortcode.php:195 libro_shortcode.php:269
-#: libro_shortcode.php:270
+#: libro_admin.php:56 libro_admin.php:115 libro_shortcode.php:85
+#: libro_shortcode.php:217 libro_shortcode.php:218 libro_shortcode.php:292
+#: libro_shortcode.php:293
 msgid "Name"
 msgstr "Nombre"
 
-#: libro_admin.php:187 libro_shortcode.php:78
+#: libro_admin.php:196 libro_shortcode.php:99
 msgid "Name of tutor"
 msgstr "Nombre del tutor"
 
-#: libro_shortcode.php:76 libro_shortcode.php:261
+#: libro_shortcode.php:97 libro_shortcode.php:284
 msgid "No"
 msgstr "No"
 
-#: libro_shortcode.php:286 libro_shortcode.php:287
+#: libro_shortcode.php:84
+msgid "Nro"
+msgstr "Nro"
+
+#: libro_shortcode.php:309 libro_shortcode.php:310
 msgid "Number of document"
 msgstr "Número de documento"
 
-#: libro_shortcode.php:81
+#: libro_shortcode.php:102
 msgid "Number of document of tutor"
-msgstr ""
+msgstr "Número de documento del tutor"
 
 #. Description of the plugin
 msgid ""
@@ -307,41 +299,46 @@ msgstr ""
 "consumidor puede hacer constar una queja relativa a un producto o servicio "
 "que ha adquirido."
 
-#: libro_shortcode.php:85 libro_shortcode.php:311
+#: libro_shortcode.php:106 libro_shortcode.php:334
 msgid "Order No."
 msgstr "N º de pedido."
 
-#: libro_admin.php:236
+#: libro_admin.php:245
 msgid "Order number"
 msgstr "Número de orden"
 
-#: libro_admin.php:474 libro_shortcode.php:210 libro_shortcode.php:282
+#: libro_admin.php:482 libro_shortcode.php:233 libro_shortcode.php:305
 msgid "Passport"
 msgstr "Pasaporte"
 
-#: libro_admin.php:502 libro_shortcode.php:84 libro_shortcode.php:307
+#: libro_admin.php:65
+msgid "PDF"
+msgstr "PDF"
+
+#: libro_admin.php:510 libro_shortcode.php:105 libro_shortcode.php:330
+#: template/rt-libro-pdf.php:207
 msgid "Product"
 msgstr "Producto"
 
-#: libro_admin.php:58 libro_admin.php:252
+#: libro_admin.php:61 libro_admin.php:261
 msgid "Product description"
 msgstr "Descripción del producto"
 
-#: libro_admin.php:258 libro_shortcode.php:87 libro_shortcode.php:319
-#: libro_shortcode.php:320
+#: libro_admin.php:267 libro_shortcode.php:108 libro_shortcode.php:342
+#: libro_shortcode.php:343
 msgid "Provider"
 msgstr "Proveedor"
 
-#: libro_admin.php:170 libro_shortcode.php:71 libro_shortcode.php:230
+#: libro_admin.php:179 libro_shortcode.php:92 libro_shortcode.php:253
 msgid "Province"
 msgstr "Provincia"
 
-#: libro_admin.php:61 libro_admin.php:302 libro_shortcode.php:88
-#: libro_shortcode.php:322 libro_shortcode.php:323
+#: libro_admin.php:64 libro_admin.php:311 libro_shortcode.php:109
+#: libro_shortcode.php:345 libro_shortcode.php:346
 msgid "Reclaimed amount"
 msgstr "Monto reclamado"
 
-#: libro_shortcode.php:74 libro_shortcode.php:245 libro_shortcode.php:246
+#: libro_shortcode.php:95 libro_shortcode.php:268 libro_shortcode.php:269
 msgid "Reference"
 msgstr "Referencia"
 
@@ -349,75 +346,76 @@ msgstr "Referencia"
 msgid "Renzo Tejada"
 msgstr "Renzo Tejada"
 
-#: libro_shortcode.php:191
+#: libro_shortcode.php:214
 msgid "Required data"
 msgstr "Datos requeridos"
 
-#: libro_shortcode.php:294
+#: libro_shortcode.php:317
 msgid "Required data "
 msgstr "Datos requeridos"
 
-#: libro_admin.php:477 libro_shortcode.php:211 libro_shortcode.php:283
+#: libro_admin.php:485 libro_shortcode.php:234 libro_shortcode.php:306
 msgid "RUC"
 msgstr "RUC"
 
-#: libro_admin.php:422
+#: libro_admin.php:431
 msgid "Save changes"
 msgstr "Guardar Cambios"
 
-#: libro_admin.php:55 libro_admin.php:122
+#: libro_admin.php:58 libro_admin.php:131
 msgid "Second last name"
 msgstr "Segundo apellido"
 
-#: libro_shortcode.php:66 libro_shortcode.php:200 libro_shortcode.php:201
+#: libro_shortcode.php:87 libro_shortcode.php:223 libro_shortcode.php:224
 msgid "Second Lastname"
 msgstr "Segundo apellido"
 
-#: libro_shortcode.php:224
+#: libro_shortcode.php:247
 msgid "Select of department"
 msgstr "Seleccionar departamento"
 
-#: libro_shortcode.php:237
+#: libro_shortcode.php:260
 msgid "Select of district"
 msgstr "Seleccionar de distrito"
 
-#: libro_shortcode.php:207
+#: libro_shortcode.php:230
 msgid "Select of documentation"
 msgstr "Selección de documentación"
 
-#: libro_shortcode.php:279
+#: libro_shortcode.php:302
 msgid "Select of documetation"
 msgstr "Selección de documentación"
 
-#: libro_shortcode.php:232
+#: libro_shortcode.php:255
 msgid "Select of province"
 msgstr "Seleccionar de provincia"
 
-#: libro_admin.php:400
+#: libro_admin.php:409
 msgid "Select page"
 msgstr "Seleccionar página"
 
-#: libro_shortcode.php:380
+#: libro_shortcode.php:403
 msgid "Send"
 msgstr "Enviar"
 
-#: libro_admin.php:505 libro_shortcode.php:84 libro_shortcode.php:308
+#: libro_admin.php:513 libro_shortcode.php:105 libro_shortcode.php:331
+#: template/rt-libro-pdf.php:207
 msgid "Service"
 msgstr "Servicio"
 
-#: libro_admin.php:446
+#: libro_admin.php:455
 msgid "Setting"
-msgstr "Ajuste"
+msgstr "Ajustes"
 
-#: rt-libro-reclamaciones.php:51
+#: rt-libro-reclamaciones.php:57
 msgid "Settings"
 msgstr "Ajustes"
 
-#: libro_shortcode.php:63
+#: libro_shortcode.php:83
 msgid "Thank you very much for leaving us your opinion about our services."
 msgstr "Muchas gracias por dejarnos tu opinión sobre nuestros servicios."
 
-#: libro_shortcode.php:367
+#: libro_shortcode.php:390
 msgid ""
 "The formulation of the claim does not preclude resorting to other means of "
 "dispute resolution nor is it a prerequisite for filing a complaint with "
@@ -427,7 +425,7 @@ msgstr ""
 "resolución de controversias ni es un requisito previo para presentar una "
 "denuncia ante el Indecopi."
 
-#: libro_shortcode.php:368
+#: libro_shortcode.php:391
 #| msgid ""
 #| "The provider must respond to the claim within a period of no more than "
 #| "thirty (30) calendar days, being able to extend the period up to thirty "
@@ -440,45 +438,45 @@ msgstr ""
 "El proveedor debe responder a la reclamación en un plazo no superior a "
 "quince (15) días naturales, pudiendo ampliar el plazo hasta quince días."
 
-#: libro_admin.php:374 libro_admin.php:414
+#: libro_admin.php:383 libro_admin.php:423
 msgid "This address is used for notifications of claims and / or complaints."
 msgstr ""
 "Esta dirección se utiliza para notificaciones de reclamos y / o quejas."
 
-#: libro_admin.php:228 libro_shortcode.php:84 libro_shortcode.php:304
-#: libro_shortcode.php:306
+#: libro_admin.php:237 libro_shortcode.php:105 libro_shortcode.php:327
+#: libro_shortcode.php:329
 msgid "Type of consumption"
 msgstr "Tipo de consumo"
 
-#: libro_admin.php:130 libro_admin.php:203 libro_shortcode.php:67
-#: libro_shortcode.php:205 libro_shortcode.php:277
+#: libro_admin.php:139 libro_admin.php:212 libro_shortcode.php:88
+#: libro_shortcode.php:228 libro_shortcode.php:300
 msgid "Type of documentation"
 msgstr "Tipo de documentación"
 
-#: libro_shortcode.php:80
+#: libro_shortcode.php:101
 msgid "Type of documentation of tutor"
 msgstr "Tipo de documentación del tutor"
 
-#: libro_admin.php:411
+#: libro_admin.php:420
 msgid "Url of Privacy and Security Policy and Cookies Policy"
 msgstr "URL de la Política de Privacidad y Seguridad y Política de Cookies"
 
-#: libro_shortcode.php:98
+#: libro_shortcode.php:120
 msgid "We have received your claim"
 msgstr "Nosotros hemos recibido su reclamo"
 
-#: libro_shortcode.php:76 libro_shortcode.php:258
+#: libro_shortcode.php:97 libro_shortcode.php:281
 msgid "Yes"
 msgstr "Si"
 
-#: libro_shortcode.php:184
+#: libro_shortcode.php:207
 msgid "Your claim / complaint was NOT registered"
 msgstr "Su reclamo / queja NO fue registrado"
 
-#: libro_shortcode.php:178
+#: libro_shortcode.php:201
 msgid "Your claim / complaint was registered:"
 msgstr "Se registró su reclamo / queja:"
 
-#: libro_shortcode.php:63
+#: libro_shortcode.php:83
 msgid "Your claim has been successfully received."
 msgstr "Su reclamo ha sido recibido con éxito."

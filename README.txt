@@ -2,7 +2,7 @@
 Contributors: renzotejada, huakotech, alexistejada
 Tags: libro de reclamaciones, libro de reclamaciones peru, libro de reclamaciones wordpress, libro de reclamaciones plugin
 Requires at least: 6.2
-Tested up to: 6.6.1
+Tested up to: 6.6.2
 Stable tag: trunk
 Requires PHP: 7.4
 License: GPLv2 or later
@@ -78,39 +78,44 @@ Instalación manual de FTP
 
 == Changelog ==
 
+= 0.4 (10/11/2024) =
+Fix: validado version WP 6.6.2
+Fix: validado versión WC 9.3.3
+Fix: error de menu al mostrar detalle de libro
+
 = 0.3 (01/09/2024) =
-Fix: validando versión WC 9.2.3
-Fix: validando versión WP 6.6.1
+Fix: validado versión WC 9.2.3
+Fix: validado versión WP 6.6.1
 
 = 0.2.0 (04/04/2024) =
-Fix: validando versión WC 8.7.0
-Fix: validando versión WP 6.5
+Fix: validado versión WC 8.7.0
+Fix: validado versión WP 6.5
 
 = 0.1.9 (22/03/2024) =
-Fix: validando versión WC 8.7.0
-Fix: validando versión WP 6.4.3
+Fix: validado versión WC 8.7.0
+Fix: validado versión WP 6.4.3
 
 = 0.1.8 (26/07/2023) =
 Fix: Se agrega la funcionalidad de generación de pdf
 Fix: Se envía la misma notificación al admin como al cliente.
-Fix: validando versión WC 7.9.0
-Fix: validando versión WP 6.3
+Fix: validado versión WC 7.9.0
+Fix: validado versión WP 6.3
 
 = 0.1.7 (06/12/2022) =
-Fix: validando versión WC 7.1.0
-Fix: validando versión WP 6.1.1
+Fix: validado versión WC 7.1.0
+Fix: validado versión WP 6.1.1
 
 = 0.1.6 (09/11/2022) =
-Fix: validando versión WC 7.1
-Fix: validando versión WP 6.1
+Fix: validado versión WC 7.1
+Fix: validado versión WP 6.1
 Fix: Cambiando el texto de libro de 30 dias a 15 dias de contestación.
 
 = 0.1.5 (16/05/2022) =
-Fix: validando versión WC 6.5.1
-Fix: validando versión WP 6.0
+Fix: validado versión WC 6.5.1
+Fix: validado versión WP 6.0
 
 = 0.1.4 (14/06/2021) =
-Fix: validando versión WC 5.4.1.
+Fix: validado versión WC 5.4.1.
 Fix: agregand links en el readme de plugins free y premium.
 
 = 0.1.3 (12/05/2021) =

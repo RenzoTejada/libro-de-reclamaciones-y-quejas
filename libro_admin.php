@@ -461,8 +461,7 @@ function rt_libro_lrq_submenu_settings_callback()
             } else {
                 rt_libro_lrq_submenu_settings_home();
             }
-        }
-    if (isset($_REQUEST['tab']) == "setting") {
+        } elseif (isset($_REQUEST['tab']) == "setting") {
         rt_libro_lrq_submenu_settings_general();
     } ?>
     </div>
