@@ -1,0 +1,12 @@
+/.wordpress-org
+/.git
+/.github
+/node_modules
+.distignore
+.gitignore
+.git
+.github
+node_modules
+*.log
+*.zip
+*.orig
