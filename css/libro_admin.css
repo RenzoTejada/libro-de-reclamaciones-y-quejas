@@ -179,6 +179,25 @@ label.error{
     height: 40px;
 }
 
+#responsive-form select {
+    width: 100% !important;
+    padding: 5px !important;
+}
+
+#responsive-form textarea {
+    width: 100%; /* Hace que ocupe todo el ancho disponible */
+    height: 100px; /* Ajuste dinámico */
+    resize: both; /* Permite redimensionar */
+}
+
+#responsive-form input[type="date"], input[type="text"] , input[type="number"]  {
+    width: 100% !important;
+    height: 40px !important;
+}
+#responsive-form .error {
+    font-size: 15px;
+}
+
 
 /**---------------- Media query ----------------**/
 @media only screen and (min-width: 48em) { 

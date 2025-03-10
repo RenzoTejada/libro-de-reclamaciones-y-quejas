@@ -79,8 +79,7 @@ jQuery(document).ready(function () {
             rules:
                     {
                         flag_menor: {required: true},
-                        acepto: {required: true},
-                        politica: {required: true}
+                        acepto: {required: true}
                     },
             messages: {
                 nombres: "Ingrese su nombre",
@@ -104,19 +103,10 @@ jQuery(document).ready(function () {
                 detalle_reclamo: "Ingrese detalle del reclamo",
                 pedido_cliente: "Ingrese su pedido",
                 flag_menor: "¿Eres menor de edad?",
-                acepto: "Campo obligatorio ",
-                politica: "Campo obligatorio"
+                acepto: "Campo obligatorio "
 
             }
         });
-    }
-
-    jQuery('#referencia').keyup(function() {
-        mayus(this);
-    });
-
-    function mayus(e) {
-        e.value = e.value.toUpperCase();
     }
 
 });

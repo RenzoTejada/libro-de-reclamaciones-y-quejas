@@ -166,7 +166,7 @@ function rt_libro_lrq_view_page()
                 'pedido_cliente' => sanitize_text_field($_POST['pedido_cliente']),
                 'monto_reclamado' => sanitize_text_field($_POST['monto_reclamado']),
                 'acepta_contenido' => sanitize_text_field($_POST['acepto']),
-                'acepta_politica' => sanitize_text_field($_POST['politica']),
+                'acepta_politica' => (isset($_POST['politica'])) ? sanitize_text_field($_POST['politica']) : '0',
                 'estado' => 1,
             );
             $libro_id = rt_libro_lrq_grabar_libro_reclamacion($libro_data);

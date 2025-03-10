@@ -450,7 +450,7 @@ function rt_libro_lrq_submenu_settings_callback()
                 print " nav-tab-active";
             } ?>"><?php _e('List', 'rt-libro') ?></a>
             <a href="?page=libro_settings&tab=setting" class="nav-tab <?php
-            if (($_REQUEST['tab'] == "setting")) {
+            if (isset($_REQUEST['tab']) && $_REQUEST['tab'] == "setting") {
                 print " nav-tab-active";
             } ?>"><?php _e('Setting', 'rt-libro') ?></a>
         </h2>
