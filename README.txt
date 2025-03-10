@@ -3,7 +3,7 @@ Contributors: renzotejada, huakotech, alexistejada
 Tags: libro de reclamaciones, libro de reclamaciones peru, libro de reclamaciones wordpress, libro de reclamaciones plugin
 Requires at least: 6.2
 Tested up to: 6.7.1
-Stable tag: 0.8
+Stable tag: 0.9
 Requires PHP: 7.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -17,6 +17,8 @@ Libro de reclamaciones válido para Perú con los campos obligatorios exigidos p
 * The site administrator cannot delete or edit the information sent by the customer.
 * The "Complaint Book" plugin generates a unique correlative ID in the database which makes it difficult to modify and edit.
 * All complaints are viewed in the same WordPress dashboard in a clear way.
+* WE ARE NOT RESPONSIBLE FOR COMPLAINTS THAT YOU MAY HAVE, ALWAYS CHECK YOUR CLAIMS BOOK WITH YOUR LEGAL AREA OR A LAWYER, AS NOT ALL COMPANIES THAT PROVIDE PRODUCTS OR SERVICES HAVE THE SAME FORMAT FIELDS.
+* THIS PLUGIN IS A GENERIC PLUGIN THAT DOES THE BASICS (HAVE THE FORM ONLINE, NOTIFY THE ADMINISTRATOR AND THE USER OF A NEW CLAIM).
 
 We also have a premium plugin which has the following features: 
 
@@ -77,6 +79,9 @@ Instalación manual de FTP
 
 
 == Changelog ==
+
+= 0.9 (10/03/2025) =
+Fix: Agregando nota.
 
 = 0.8 (10/03/2025) =
 Fix: Quitando retrincción de obligacion de politicas de cookies.
