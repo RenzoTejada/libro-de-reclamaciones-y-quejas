@@ -6,72 +6,56 @@ require 'vendor/autoload.php';
 
 use Dompdf\Dompdf;
 
-add_filter('template_include', 'rt_libro_lrq_reclamacion_template');
-
-// Page template filter callback
-function rt_libro_lrq_reclamacion_template($template)
-{
-    $page_libro_id = get_option('libro_setting_page');
-    if (is_page($page_libro_id)) {
-        $template = WP_PLUGIN_DIR . '/libro-de-reclamaciones-y-quejas/template/rt-libro-lrq-full-template.php';
-    }
-    return $template;
-}
-
 
 function rt_libro_lrq_grabar_libro_reclamacion($libro_data)
 {
-    $libro_data['departamento'] = rt_libro_lrq_get_departamento_por_id_one($libro_data['departamento']);
-    $libro_data['provincia'] = rt_libro_lrq_get_provincia_por_id_one($libro_data['provincia']);
-    $libro_data['distrito'] = rt_libro_lrq_get_distrito_por_id_one($libro_data['distrito']);
-
-    global $wpdb;
+    global $wpdb; // Mantener el uso global, pero se puede considerar pasar como parámetro.
+    // Agrupar las consultas para obtener los datos de departamento, provincia y distrito.
+    $departamento = rt_libro_lrq_get_departamento_por_id_one($libro_data['departamento']);
+    $provincia = rt_libro_lrq_get_provincia_por_id_one($libro_data['provincia']);
+    $distrito = rt_libro_lrq_get_distrito_por_id_one($libro_data['distrito']);
+    // Asignar los valores obtenidos a $libro_data.
+    $libro_data['departamento'] = $departamento;
+    $libro_data['provincia'] = $provincia;
+    $libro_data['distrito'] = $distrito;
+    // Insertar en la base de datos.
     $table_name = $wpdb->prefix . "rt_libro";
-    $wpdb->insert($table_name, $libro_data);
-    $libro_id = $wpdb->insert_id;
-
-    if ($libro_id) {
+    if ($wpdb->insert($table_name, $libro_data)) {
+        $libro_id = $wpdb->insert_id;
         $filepath = rt_libro_lrq_crear_pdf_libro_reclamacion($libro_data, $libro_id);
         rt_libro_lrq_enviar_mail_libro_reclamacion($libro_data, $libro_id, $filepath);
-    } else {
-        $libro_id = 0;
+        return $libro_id; // Retornar el ID del libro creado.
     }
-    return $libro_id;
+    return null; // Retornar null en caso de fallo en la inserción.
 }
 
 function rt_libro_lrq_get_type_doc($tipo_doc)
 {
-    $nombre_tipo_doc = '';
-    switch ($tipo_doc){
-        case 1:
-            $nombre_tipo_doc = "DNI";
-            break;
-        case 2:
-            $nombre_tipo_doc = "CE";
-            break;
-        case 3:
-            $nombre_tipo_doc = "Passport";
-            break;
-        case 4:
-            $nombre_tipo_doc = "RUC";
-            break;
-    }
-    return $nombre_tipo_doc;
+    $tipos_documento = [
+        1 => "DNI",
+        2 => "CE",
+        3 => "Passport",
+        4 => "RUC"
+    ];
+    return isset($tipos_documento[$tipo_doc]) ? $tipos_documento[$tipo_doc] : "Tipo de documento desconocido";
 }
 
 function rt_libro_lrq_crear_pdf_libro_reclamacion($libro_data, $libro_id)
 {
     $dompdf = new Dompdf();
-    $wp_upload_dir = wp_upload_dir() ;
+    $wp_upload_dir = wp_upload_dir();
     $upload_dir = $wp_upload_dir['basedir'] . '/libro-pdfs';
+    // Asegurarse de que el directorio existe
+    if (!file_exists($upload_dir)) {
+        wp_mkdir_p($upload_dir);
+    }
+    // Usar ob_start() y ob_get_clean() de manera eficiente
     ob_start();
-    include ( WP_PLUGIN_DIR . '/libro-de-reclamaciones-y-quejas/template/rt-libro-pdf.php');
-    $view = ob_get_contents();
-    ob_get_clean();
+    include(WP_PLUGIN_DIR . '/libro-de-reclamaciones-y-quejas/template/rt-libro-pdf.php');
+    $view = ob_get_clean();
     $dompdf->loadHtml($view);
     $dompdf->render();
     $pdf = $dompdf->output();
-    wp_mkdir_p($upload_dir);
     $filename = $upload_dir . '/libro-' . $libro_id . ".pdf";
     file_put_contents($filename, $pdf);
     return $filename;
@@ -122,62 +106,63 @@ function rt_libro_lrq_enviar_mail_libro_reclamacion($libro_data, $libro_id, $fil
 
 function rt_libro_lrq_view_page()
 {
+    static $scripts_enqueued = false; // Variable estática para evitar registrar scripts múltiples veces
     $html = '';
     if (!is_admin()) {
-        wp_register_script('libro_script_validate', plugins_url('js/jquery.validate.min.js', __FILE__), array('jquery'), '1.10', true);
-        wp_enqueue_script('libro_script_validate');
-        wp_register_style('libro_script_admin', plugins_url('css/libro_admin.css', __FILE__), array(), '0.0.4');
-        wp_enqueue_style('libro_script_admin');
-        wp_register_script('libro_script_admin', plugins_url('js/libro_script_admin.js', __FILE__), array(), '0.0.2');
-        wp_enqueue_script('libro_script_admin');
-
-        global $rpt;
-        global $libro_id;
-        $rpt = 3;
+        if (!$scripts_enqueued) {
+            wp_register_script('libro_script_validate', plugins_url('js/jquery.validate.min.js', __FILE__), array('jquery'), '1.10', true);
+            wp_enqueue_script('libro_script_validate');
+            wp_register_style('libro_script_admin', plugins_url('css/libro_admin.css', __FILE__), array(), '0.0.4');
+            wp_enqueue_style('libro_script_admin');
+            wp_register_script('libro_script_admin', plugins_url('js/libro_script_admin.js', __FILE__), array(), '0.0.2');
+            wp_enqueue_script('libro_script_admin');
+            $scripts_enqueued = true; // Marcamos que los scripts ya han sido encolados
+        }
+        $rpt = 3; // Se puede considerar pasar esto como parámetro o devolverlo
+        $libro_id = null; // Inicializamos la variable
         if (isset($_POST['guardar_libro_reclamacion'])) {
-            $libro_data = array(
-                'nombre' => sanitize_text_field($_POST['nombres']),
-                'apellido_paterno' => sanitize_text_field($_POST['paterno']),
-                'apellido_materno' => sanitize_text_field($_POST['materno']),
-                'tipo_doc' => sanitize_text_field($_POST['tipo_doc']),
-                'nro_documento' => sanitize_text_field($_POST['nro_doc']),
-                'fono' => sanitize_text_field($_POST['cel']),
+            $libro_data = array_map('sanitize_text_field', array(
+                'nombre' => $_POST['nombres'],
+                'apellido_paterno' => $_POST['paterno'],
+                'apellido_materno' => $_POST['materno'],
+                'tipo_doc' => $_POST['tipo_doc'],
+                'nro_documento' => $_POST['nro_doc'],
+                'fono' => $_POST['cel'],
                 'email' => sanitize_email($_POST['correo']),
-                'direccion' => sanitize_text_field($_POST['direccion']),
-                'referencia' => sanitize_text_field($_POST['referencia']),
-                'departamento' => sanitize_text_field($_POST['dep']),
-                'provincia' => sanitize_text_field($_POST['prov']),
-                'distrito' => sanitize_text_field($_POST['dist']),
-                'flag_menor' => sanitize_text_field($_POST['flag_menor']),
-                'nombre_tutor' => sanitize_text_field($_POST['nombre_tutor']),
-                'email_tutor' => sanitize_text_field($_POST['correo_tutor']),
-                'tipo_doc_tutor' => sanitize_text_field($_POST['tipo_doc_tutor']),
-                'numero_documento_tutor' => sanitize_text_field($_POST['nro_doc_tutor']),
-                'tipo_reclamacion' => sanitize_text_field($_POST['tipo_reclamo']),
-                'tipo_consumo' => sanitize_text_field($_POST['tipo_consumo']),
-                'nro_pedido' => sanitize_text_field($_POST['nro_pedido']),
-                'fch_reclamo' => sanitize_text_field($today = date("Y-m-d", time())),
-                'descripcion' => sanitize_text_field($_POST['descripcion']),
-                'proveedor' => sanitize_text_field($_POST['proveedor']),
-                'fch_compra' => sanitize_text_field($_POST['fch_compra']),
-                'fch_consumo' => sanitize_text_field($_POST['fch_consumo']),
-                'fch_vencimiento' => sanitize_text_field($_POST['fch_vencimiento']),
-                'detalle' => sanitize_text_field($_POST['detalle_reclamo']),
-                'pedido_cliente' => sanitize_text_field($_POST['pedido_cliente']),
-                'monto_reclamado' => sanitize_text_field($_POST['monto_reclamado']),
-                'acepta_contenido' => sanitize_text_field($_POST['acepto']),
-                'acepta_politica' => (isset($_POST['politica'])) ? sanitize_text_field($_POST['politica']) : '0',
+                'direccion' => $_POST['direccion'],
+                'referencia' => $_POST['referencia'],
+                'departamento' => $_POST['dep'],
+                'provincia' => $_POST['prov'],
+                'distrito' => $_POST['dist'],
+                'flag_menor' => $_POST['flag_menor'],
+                'nombre_tutor' => $_POST['nombre_tutor'],
+                'email_tutor' => $_POST['correo_tutor'],
+                'tipo_doc_tutor' => $_POST['tipo_doc_tutor'],
+                'numero_documento_tutor' => $_POST['nro_doc_tutor'],
+                'tipo_reclamacion' => $_POST['tipo_reclamo'],
+                'tipo_consumo' => $_POST['tipo_consumo'],
+                'nro_pedido' => $_POST['nro_pedido'],
+                'fch_reclamo' => date("Y-m-d"), // Solo se llama una vez
+                'descripcion' => $_POST['descripcion'],
+                'proveedor' => $_POST['proveedor'],
+                'fch_compra' => $_POST['fch_compra'],
+                'fch_consumo' => $_POST['fch_consumo'],
+                'fch_vencimiento' => $_POST['fch_vencimiento'],
+                'detalle' => $_POST['detalle_reclamo'],
+                'pedido_cliente' => $_POST['pedido_cliente'],
+                'monto_reclamado' => $_POST['monto_reclamado'],
+                'acepta_contenido' => $_POST['acepto'],
+                'acepta_politica' => isset($_POST['politica']) ? $_POST['politica'] : '0',
                 'estado' => 1,
-            );
+            ));
             $libro_id = rt_libro_lrq_grabar_libro_reclamacion($libro_data);
         }
-
         $html .= '
         <div class="wrapper claim-wong center">
             <div class="content">
         ';
-        $html .= '<section class = "libro-content">';
-        $html .= rt_libro_lrq_html_form_libro_reclamacion();
+        $html .= '<section class="libro-content">';
+        $html .= rt_libro_lrq_html_form_libro_reclamacion($libro_id, $rpt);
         $html .= '</section>';
         $html .= '</div>';
         $html .= '</div>';
@@ -187,28 +172,25 @@ function rt_libro_lrq_view_page()
 
 add_shortcode('libro_page', 'rt_libro_lrq_view_page');
 
-function rt_libro_lrq_html_form_libro_reclamacion()
+function rt_libro_lrq_html_form_libro_reclamacion($libro_id, $rpt)
 {
     $departamentos = rt_libro_lrq_get_departamento_front();
-    $page_libro_url = (get_option('libro_setting_url') =='' ? '#':get_option('libro_setting_url'));
-    $html = '';
-    $today = date("d/m/Y", time());
-    $html = '<form id="rt_form_libro" action="" method="post">
+    $page_libro_url = get_option('libro_setting_url') ?: '#';
+    $today = date("d/m/Y");
+    $html_parts = [];
+    $html_parts[] = '<form id="rt_form_libro" action="" method="post">
         <div id="responsive-form" class="clearfix">';
-
-    if ($GLOBALS['libro_id']) {
-        $html .= '<div class="form-row-libro">
+    if ($libro_id) {
+        $html_parts[] = '<div class="form-row-libro">
                             <div class="column-full" style="text-align: center;">'.__('Your claim / complaint was registered:', 'rt-libro').'</div>
-                            <div class="column-full" style="text-align: center;">N°: 00'.$GLOBALS['libro_id'].'</div>
-                  </div>
-                    ';
-    } elseif ($GLOBALS['rpt'] == 0) {
-        $html .= '<div class="form-row-libro">
+                            <div class="column-full" style="text-align: center;">N°: 00'.$libro_id.'</div>
+                          </div>';
+    } elseif ($rpt == 0) {
+        $html_parts[] = '<div class="form-row-libro">
                             <div class="column-full" style="text-align: center;">'.__('Your claim / complaint was NOT registered', 'rt-libro').'</div>
                         </div>';
     }
-
-    $html .= '
+    $html_parts[] = '
             <div class="form-row-libro">
                 <div class="column-full"><h2 class="title">'.__('Complaining Consumer Identification', 'rt-libro').' 
                 <b class="alert" style="font-size: 10px">* '.__('Required data', 'rt-libro').'</b></h2> </div>
@@ -238,7 +220,7 @@ function rt_libro_lrq_html_form_libro_reclamacion()
                     <input type="text" name="nro_doc" value="" size="40" placeholder="'.__('Documentation number', 'rt-libro').' " class="required" >
                 </div>
                 <div class="column-half">'.__('Celphone', 'rt-libro').' <b class="alert">*</b>
-                    <input type="text" name="cel" value="" size="40" placeholder="'.__('Documentation number', 'rt-libro').'" class="required" >
+                    <input type="text" name="cel" value="" size="40" placeholder="'.__('Celphone', 'rt-libro').'" class="required" >
                 </div>
             </div>
             <div class="form-row-libro">
@@ -246,9 +228,9 @@ function rt_libro_lrq_html_form_libro_reclamacion()
                     <select id="dep" name="dep" tabindex="-1" aria-hidden="true" class="required" >
                         <option value="">'.__('Select of department', 'rt-libro').'</option>';
     foreach ($departamentos as $depa) {
-        $html .= '<option value="' . $depa['idDepa'] . '">' . $depa['departamento'] . '</option>';
+        $html_parts[] = '<option value="' . $depa['idDepa'] . '">' . $depa['departamento'] . '</option>';
     }
-    $html .= ' </select>
+    $html_parts[] = ' </select>
                 </div>
                 <div class="column-half">'.__('Province', 'rt-libro').' <b class="alert">*</b>
                     <select id="prov" name="prov" tabindex="-1" aria-hidden="true" class="required">
@@ -299,7 +281,7 @@ function rt_libro_lrq_html_form_libro_reclamacion()
             <div class="form-row-libro" id="doc_tutor" style="display: none;" >
                 <div class="column-two">'.__('Type of documentation', 'rt-libro').' 
                     <select id="tipo_doc_tutor" name="tipo_doc_tutor" tabindex="-1" aria-hidden="true" >
-                        <option value="">'.__('Select of documetation', 'rt-libro').'</option>
+                        <option value="">'.__('Select of documentation', 'rt-libro').'</option>
                         <option value="1">'.__('DNI', 'rt-libro').'</option>
                         <option value="2">'.__('CE', 'rt-libro').'</option>
                         <option value="3">'.__('Passport', 'rt-libro').'</option>
@@ -405,6 +387,6 @@ function rt_libro_lrq_html_form_libro_reclamacion()
             </div>
         </div>
     </form>';
-    
-    return $html;
+    return implode('', $html_parts);
 }
+
