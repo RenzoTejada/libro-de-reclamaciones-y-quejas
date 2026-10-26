@@ -11,10 +11,10 @@
  * Text Domain:       rt-libro
  * Domain Path:       /languages
  *
- * Requires at least: 6.8
+ * Requires at least: 7.1
  * Requires PHP:      7.4
  * WC requires at least: 2.6
- * WC tested up to:   9.9.0
+ * WC tested up to:   11.2.1
  */
 if (!defined('ABSPATH')) {
     exit; // Salir si se accede directamente
