@@ -1,290 +1,90 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Libro de reclamaciones</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
+<?php
+if (!defined('ABSPATH')) { exit; }
+$company = get_option('rt_libro_company_details', array());
+if (!is_array($company)) { $company = array(); }
+$val = static function ($key) use ($libro_data) { return esc_html(isset($libro_data[$key]) ? (string)$libro_data[$key] : ''); };
+$cval = static function ($key) use ($company) { return esc_html(isset($company[$key]) ? (string)$company[$key] : ''); };
+$date = !empty($libro_data['fch_reclamo']) && strtotime($libro_data['fch_reclamo']) ? date('d/m/Y', strtotime($libro_data['fch_reclamo'])) : '';
+$logo = '';
+if (!empty($company['logo_id']) && (!isset($company['show_logo']) || $company['show_logo'] === 'yes')) {
+    $logo_path = get_attached_file(absint($company['logo_id']));
+    if ($logo_path && is_readable($logo_path) && filesize($logo_path) < 1048576) {
+        $mime = wp_check_filetype($logo_path);
+        if (in_array($mime['type'], array('image/png','image/jpeg'), true)) {
+            $bytes = file_get_contents($logo_path);
+            if ($bytes !== false) { $logo = 'data:' . $mime['type'] . ';base64,' . base64_encode($bytes); }
         }
-        td, th {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-        .text-right {
-            text-align: right;
-        }
-        .text-left {
-            text-align: left;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .pr-5 {
-            padding-right: 90px;
-        }
-        .text-uppercase {
-            text-transform: uppercase;
-        }
-        .mb-0 {
-            margin-bottom: 0;
-        }
-        .mt-0 {
-            margin-top: 0;
-        }
-
-        table.invoice-detail tbody tr:nth-child(odd) {
-            background-color:#f2f2f2;
-        }
-
-        table.invoice-detail tbody tr:nth-child(even) {
-            background-color:#fbfbfb;
-        }
-        .bg-gray-light {
-            background-color:#f2f2f2;
-        }
-        .bg-gray-light-1 {
-            background-color:#fbfbfb;
-        }
-        .logo {
-            margin-bottom: 20px;
-        }
-        .text-gray {
-            color: #585858;
-        }
-        .fs-14 {
-            font-size: 14px;
-        }
-
-        .fs-12 {
-            font-size: 12px;
-        }
-
-        .fs-10 {
-            font-size: 10px;
-        }
-
-        .bg-gray{
-            background: #CCC;
-        }
-        .pagenum {
-            position: absolute;
-            bottom: 0;
-            left: 10px;
-            width: 100%;
-            text-align: center;
-        }
-        .pagenum:before {
-            font-family: "Myriad Pro", Arial, Helvetica, sans-serif;
-            font-size: 10px;
-            content: "Página " counter(page);
-        }
-        table {
-            border-collapse: collapse;
-            font-size: 12px;
-        }
-        td {
-            height: 25px;
-            vertical-align: middle;
-        }
-    </style>
-</head>
-<body style="padding: 20px;">
-<table width="100%" border="1" style="margin-top: 10px;">
-    <tbody>
-    <tr>
-        <td style="color: #000000; text-align: center;" colspan="3">
-            LIBRO DE RECLAMACIONES
-        </td>
-        <td rowspan="2" colspan="2">
-            <table border="0" width="100%">
-                <tbody>
-                <tr>
-                    <td colspan="2" style="color: #000000; text-align: center;">HOJA DE RECLAMACIÓN</td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="color: #e70011; text-align: center;">
-                        Nº 00<?php echo $libro_id; ?>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td style="padding: 0;" colspan="3">
-            <table width="100%" border="1" style="border-top: none; border-bottom: none;">
-                <tbody>
-                <tr>
-                    <td style="color: #000000;">FECHA</td>
-                    <td><?php echo date('d', strtotime($libro_data["fch_reclamo"])); ?></td>
-                    <td><?php echo date('m', strtotime($libro_data["fch_reclamo"])); ?></td>
-                    <td><?php echo date('Y', strtotime($libro_data["fch_reclamo"])); ?></td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td style="color: #000000;" bgcolor="#c3c3c3" colspan="5">
-            <b>Identificación del consumidor reclamante</b>
-        </td>
-    </tr>
-    <tr>
-        <td style="color: #000000;" width="50%" colspan="2"><b>NOMBRE:</b></td>
-        <td style="color: #000000;" colspan="3" width="50%"><?php echo $libro_data["nombre"] . " " . $libro_data["apellido_paterno"] . " " . $libro_data["apellido_materno"] ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;" width="50%" colspan="2">DIRECCIÓN:</td>
-        <td style="color: #000000;" colspan="3" width="50%"><?php echo $libro_data["direccion"] ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;" width="50%" colspan="2">REF DIRECCIÓN:</td>
-        <td style="color: #000000;" colspan="3" width="50%"><?php echo $libro_data["referencia"] ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;" width="50%">TIPO DOCUMENTACIÓN:</td>
-        <td style="color: #000000;" width="20%"><?php echo  rt_libro_lrq_get_type_doc($libro_data['tipo_doc']) ?></td>
-        <td style="color: #000000;" width="10%">NRO DOCUMENTACIÓN:</td>
-        <td style="color: #000000;" width="20%" colspan="2"><?php echo $libro_data["nro_documento"] ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;" width="50%" colspan="2">¿Eres menor de edad?:</td>
-        <td style="color: #000000;" colspan="3" width="50%"><?php echo ($libro_data["flag_menor"] == '1') ? 'Si': 'No' ?></td>
-    </tr>
-    <?php if($libro_data["flag_menor"]=='1'){ ?>
-        <tr>
-            <td style="color: #000000;" width="50%" colspan="2">Nombre PADRE, MADRE O TUTOR:</td>
-            <td style="color: #000000;" colspan="3" width="50%"><?php echo $libro_data["nombre_tutor"] ?></td>
-        </tr>
-        <tr>
-            <td style="color: #000000;" width="50%" colspan="2">Email PADRE, MADRE O TUTOR:</td>
-            <td style="color: #000000;" colspan="3" width="50%"><?php echo $libro_data["email_tutor"] ?></td>
-        </tr>
-        <tr>
-            <td style="color: #000000;" width="50%" colspan="2">Tipo Documento PADRE, MADRE O TUTOR:</td>
-            <td style="color: #000000;" colspan="3" width="50%"><?php echo rt_libro_lrq_get_type_doc($libro_data['tipo_doc_tutor']) ?></td>
-        </tr>
-        <tr>
-            <td style="color: #000000;" width="50%" colspan="2">Nro Documento PADRE, MADRE O TUTOR:</td>
-            <td style="color: #000000;" colspan="3" width="50%"><?php echo $libro_data["numero_documento_tutor"] ?></td>
-        </tr>
-    <?php }  ?>
-    <tr>
-        <td style="color: #000000;" width="50%" colspan="2"><b>DEPARTAMENTO:</b></td>
-        <td style="color: #000000;" colspan="3" width="50%"><?php echo $libro_data["departamento"] ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;" width="50%" colspan="2">PROVINCIA:</td>
-        <td style="color: #000000;" colspan="3" width="50%"><?php echo $libro_data["provincia"] ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;" width="50%" colspan="2">DISTRITO:</td>
-        <td style="color: #000000;" colspan="3" width="50%"><?php echo $libro_data["distrito"] ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;" width="50%" colspan="2">TELÉFONO:</td>
-        <td style="color: #000000;" colspan="3" width="50%"><?php echo $libro_data["fono"] ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;" width="50%" colspan="2">E-MAIL:</td>
-        <td style="color: #000000;" colspan="3" width="50%"><?php echo $libro_data["email"] ?></td>
-    </tr>
-
-    <tr>
-        <td style="color: #000000;" bgcolor="#c3c3c3" colspan="5">
-            <b>Detalle del reclamo y orden del consumidor </b>
-        </td>
-    </tr>
-    <tr>
-        <td style="color: #000000;"width="50%" colspan="2"> TIPO RECLAMO:</td>
-        <td style="color: #000000;" width="50%" colspan="3"><?php echo ($libro_data['tipo_reclamacion'] == 1 ? __('Claim', 'rt-libro') : __('Complain', 'rt-libro')) ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;"width="50%" colspan="2"> TIPO CONSUMO:</td>
-        <td style="color: #000000;" width="50%" colspan="3"><?php echo  ($libro_data['tipo_consumo']==1 ? __('Product', 'rt-libro') : __('Service', 'rt-libro')) ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;"width="50%" colspan="2"> NRO DE PEDIDO:</td>
-        <td style="color: #000000;" width="50%" colspan="3"><?php echo $libro_data["nro_pedido"] ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;"width="50%" colspan="2"> PROVEEDOR:</td>
-        <td style="color: #000000;" width="50%" colspan="3"><?php echo $libro_data["proveedor"] ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;"width="50%" colspan="2"> MONTO DE RECLAMO:</td>
-        <td style="color: #000000;" width="50%" colspan="3"><?php echo $libro_data["monto_reclamado"] ?></td>
-    </tr>
-    <tr>
-        <td colspan="5" style="color: #000000; height: 120px; vertical-align: top;">
-            DESCRIPCIÓN: <?php echo $libro_data["descripcion"] ?>
-        </td>
-    </tr>
-    <tr>
-        <td style="color: #000000;"width="50%" colspan="2"> FECHA DE COMPRA:</td>
-        <td style="color: #000000;" width="50%" colspan="3"><?php echo date("d/m/Y", strtotime($libro_data['fch_compra'])) ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;"width="50%" colspan="2"> FECHA DE CONSUMO:</td>
-        <td style="color: #000000;" width="50%" colspan="3"><?php echo date("d/m/Y", strtotime($libro_data['fch_consumo'])) ?></td>
-    </tr>
-    <tr>
-        <td style="color: #000000;"width="50%" colspan="2"> FECHA DE VENCIMIENTO:</td>
-        <td style="color: #000000;" width="50%" colspan="3"><?php echo date("d/m/Y", strtotime($libro_data['fch_vencimiento'])) ?></td>
-    </tr>
-    <tr>
-        <td colspan="5" style="color: #000000; height: 120px; vertical-align: top;">
-            DETALLE: <?php echo $libro_data["detalle"] ?>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4" style="color: #000000; height: 80px; vertical-align: top;">
-            PEDIDO: <?php echo $libro_data["pedido_cliente"] ?>
-        </td>
-        <td style="color: #000000; vertical-align: bottom; height: 80px;">
-            ______________________
-            FIRMA DEL CONSUMIDOR
-        </td>
-    </tr>
-
-    <tr>
-        <td style="color: #000000;" bgcolor="#c3c3c3" colspan="5">
-            <b>4. OBSERVACIONES Y ACCIONES ADOPTADAS POR EL PROVEEDOR</b>
-        </td>
-    </tr>
-    <tr>
-        <td style="color: #000000;">FECHA DE COMUNICACIÓN DE LA RESPUESTA:</td>
-        <td style="color: #000000;"></td>
-        <td style="color: #000000;"></td>
-        <td style="color: #000000;"></td>
-        <td style="color: #000000; vertical-align: bottom; height: 80px;" rowspan="2">
-            ______________________
-            FIRMA DEL CONSUMIDOR
-        </td>
-    </tr>
-    <tr>
-        <td colspan="3" style="color: #000000; height: 80px; vertical-align: top;">
-            DETALLE:
-        </td>
-    </tr>
-    <tr>
-        <td style="color: #000000; font-size: 10px; text-align:center;" colspan="2" width="50%">
-            1. RECLAMO: Disconformidad relacionada a los productos<br>y servicios
-        </td>
-        <td style="color: #000000; font-size: 10px; text-align:center;" colspan="3" width="50%">
-            2. QUEJA: Disconformidad no relacionada a los productos o servicios; o malestar o descontento respecto a la atención al público.
-        </td>
-    </tr>
-    <tr>
-        <td colspan="5" style="height: 20px;"></td>
-    </tr>
-    </tbody>
-</table>
-<p style="font-size: 11px; color: #000000">La formulación del reclamo no impide acudir a otras vías de solución de controversias ni es requisito previo para interponer una denuncia a INDECOPI. El proveedor deberá dar respuesta al reclamo en un plazo no mayor a quince (15) días hábiles improrrogables.</p>
-
-<span class="pagenum"></span>
-</body>
-</html>
+    }
+}
+$rows = static function ($items) {
+    foreach ($items as $label => $value) {
+        if ($value === '' || $value === null) { continue; }
+        echo '<tr><td class="field-label">' . esc_html($label) . '</td><td class="field-value">' . nl2br(esc_html((string)$value)) . '</td></tr>';
+    }
+};
+?>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><style>
+@page { margin: 26px 32px 30px; }
+body { font-family: DejaVu Sans, sans-serif; color:#202020; font-size:9px; margin:0; }
+table { border-collapse: collapse; width:100%; }
+.header { border-bottom:2px solid #383838; padding-bottom:10px; margin-bottom:14px; }
+.header td { vertical-align:middle; }
+.logo-cell { width:82px; }
+.logo-cell img { max-width:73px; max-height:65px; }
+.company-name { font-size:13px; font-weight:bold; color:#171717; margin-bottom:4px; }
+.company-details { color:#555555; font-size:8px; line-height:1.5; }
+.company-details strong { color:#202020; }
+.document-title { font-size:16px; font-weight:bold; color:#171717; margin:0 0 3px; }
+.document-subtitle { color:#626262; font-size:8px; }
+.identity { margin:12px 0 13px; background:#f3f3f3; border:1px solid #dedede; }
+.identity td { padding:10px 12px; }
+.identity-label { text-transform:uppercase; font-size:7px; color:#666666; letter-spacing:0.6px; }
+.identity-number { font-size:15px; font-weight:bold; color:#181818; }
+.section { margin-top:11px; page-break-inside:avoid; }
+.section-heading { background:#ededed; color:#242424; padding:7px 9px; font-weight:bold; font-size:10px; }
+.data td { border-bottom:1px solid #dddddd; padding:6px 9px; vertical-align:top; line-height:1.4; }
+.data .field-label { width:35%; color:#555555; }
+.data .field-value { font-weight:bold; word-wrap:break-word; }
+.description { padding:7px 9px; border:1px solid #dddddd; border-top:none; line-height:1.45; }
+.description .desc-label { font-weight:bold; color:#444444; font-size:8px; margin-bottom:4px; }
+.notice { margin-top:12px; padding:9px 10px; background:#f6f6f6; color:#555555; font-size:7.4px; line-height:1.55; }
+.signatures { margin-top:17px; font-size:8px; color:#555555; }
+.signatures td { width:50%; text-align:center; padding-top:18px; }
+.small { font-size:7.3px; color:#555555; }
+</style></head><body>
+<div class="header"><table><tr>
+<?php if ($logo): ?><td class="logo-cell"><img src="<?php echo esc_attr($logo); ?>" alt=""></td><?php endif; ?>
+<td><div class="company-name"><?php echo $cval('trade_name') ?: $cval('legal_name') ?: esc_html(get_bloginfo('name')); ?></div>
+<div class="company-details">
+<?php if ($cval('legal_name')): ?><strong>Razón social:</strong> <?php echo $cval('legal_name'); ?> &nbsp; <?php endif; ?>
+<?php if ($cval('ruc')): ?><strong>RUC:</strong> <?php echo $cval('ruc'); ?><br><?php endif; ?>
+<?php if ($cval('address')): ?><strong>Dirección:</strong> <?php echo $cval('address'); ?><br><?php endif; ?>
+<?php if ($cval('phone')): ?><strong>Teléfono:</strong> <?php echo $cval('phone'); ?><?php endif; ?>
+</div></td></tr></table></div>
+<div class="document-title">Libro de Reclamaciones</div><div class="document-subtitle">Hoja de reclamación / queja · Constancia de registro</div>
+<table class="identity"><tr><td><div class="identity-label">Número de registro</div><div class="identity-number">N.º <?php echo esc_html(str_pad((string)$libro_id, 5, '0', STR_PAD_LEFT)); ?></div></td><td><div class="identity-label">Fecha de registro</div><strong><?php echo esc_html($date); ?></strong></td><td><div class="identity-label">Tipo</div><strong><?php echo ((string)($libro_data['tipo_reclamacion'] ?? '') === '1') ? 'Reclamo' : 'Queja'; ?></strong></td></tr></table>
+<div class="section"><div class="section-heading">1. Identificación del consumidor reclamante</div><table class="data">
+<?php $rows(array(
+'Nombre completo' => trim(($libro_data['nombre'] ?? '') . ' ' . ($libro_data['apellido_paterno'] ?? '') . ' ' . ($libro_data['apellido_materno'] ?? '')),
+'Documento' => rt_libro_lrq_get_type_doc($libro_data['tipo_doc'] ?? '') . ' · ' . ($libro_data['nro_documento'] ?? ''),
+'Teléfono' => $libro_data['fono'] ?? '', 'Correo electrónico' => $libro_data['email'] ?? '',
+'Dirección' => $libro_data['direccion'] ?? '', 'Referencia' => $libro_data['referencia'] ?? '',
+'Departamento' => $libro_data['departamento'] ?? '', 'Provincia' => $libro_data['provincia'] ?? '', 'Distrito' => $libro_data['distrito'] ?? '',
+'¿Es menor de edad?' => ($libro_data['flag_menor'] ?? '') === '1' ? 'Sí' : 'No',
+)); ?>
+<?php if (($libro_data['flag_menor'] ?? '') === '1'): $rows(array('Padre, madre o tutor' => $libro_data['nombre_tutor'] ?? '', 'Correo del tutor' => $libro_data['email_tutor'] ?? '', 'Documento del tutor' => rt_libro_lrq_get_type_doc($libro_data['tipo_doc_tutor'] ?? '') . ' · ' . ($libro_data['numero_documento_tutor'] ?? ''))); endif; ?>
+</table></div>
+<div class="section"><div class="section-heading">2. Detalle del reclamo o queja</div><table class="data">
+<?php $rows(array(
+'Tipo de reclamo' => (($libro_data['tipo_reclamacion'] ?? '') == '1' ? 'Reclamo' : 'Queja'),
+'Tipo de consumo' => (($libro_data['tipo_consumo'] ?? '') == '1' ? 'Producto' : 'Servicio'),
+'Número de pedido' => $libro_data['nro_pedido'] ?? '', 'Proveedor' => $libro_data['proveedor'] ?? '',
+'Monto reclamado (S/)' => $libro_data['monto_reclamado'] ?? '',
+'Fecha de compra' => $libro_data['fch_compra'] ?? '', 'Fecha de consumo' => $libro_data['fch_consumo'] ?? '', 'Fecha de vencimiento' => $libro_data['fch_vencimiento'] ?? '',
+)); ?></table>
+<?php foreach (array('Descripción del producto o servicio'=>'descripcion','Detalle del reclamo o queja'=>'detalle','Pedido del consumidor'=>'pedido_cliente') as $label=>$key): ?><div class="description"><div class="desc-label"><?php echo esc_html($label); ?></div><?php echo nl2br($val($key)); ?></div><?php endforeach; ?>
+</div>
+<div class="section"><div class="section-heading">3. Observaciones y acciones adoptadas por el proveedor</div><div class="description"><span class="small">Fecha de comunicación de la respuesta:</span> ____________________<div style="height:28px"></div><span class="small">Detalle / respuesta:</span> ___________________________________________________________</div></div>
+<div class="signatures"><table><tr><td>________________________________<br>Firma del consumidor (si corresponde)</td><td>________________________________<br>Representante del proveedor (si corresponde)</td></tr></table></div>
+<div class="notice"><strong>Información importante:</strong> Reclamo: disconformidad relacionada con los productos o servicios. Queja: disconformidad no relacionada con ellos o malestar respecto a la atención al público.<br>La formulación del reclamo no impide acudir a otras vías de solución de controversias ni es requisito previo para interponer una denuncia ante INDECOPI. El proveedor deberá responder en un plazo máximo de quince (15) días hábiles improrrogables.</div>
+</body></html>

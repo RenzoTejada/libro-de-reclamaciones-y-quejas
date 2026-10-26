@@ -11,8 +11,9 @@ function rt_libro_lrq_create_tables_default()
     global $wpdb;
     $table_libro = $wpdb->prefix . "rt_libro";
     $query_rt_libro = "
-        CREATE TABLE IF NOT EXISTS $table_libro (
+        CREATE TABLE $table_libro (
             `libro_id` INT NOT NULL AUTO_INCREMENT,
+            `submission_token` VARCHAR(64) DEFAULT NULL,
             `nombre` VARCHAR(100) DEFAULT NULL,
             `apellido_paterno` VARCHAR(100) DEFAULT NULL,
             `apellido_materno` VARCHAR(100) DEFAULT NULL,
@@ -45,9 +46,11 @@ function rt_libro_lrq_create_tables_default()
             `acepta_contenido` TINYINT DEFAULT NULL,
             `acepta_politica` TINYINT DEFAULT NULL,
             `respuesta` TEXT DEFAULT NULL,
+            `rt_responded_at` DATETIME DEFAULT NULL,
             `estado` TINYINT DEFAULT NULL,
             `url_adjunto` VARCHAR(250) DEFAULT NULL,
-            PRIMARY KEY (`libro_id`)
+            PRIMARY KEY (`libro_id`),
+            UNIQUE KEY `submission_token` (`submission_token`)
         ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
 
     // Manejo de errores
@@ -64,4 +67,11 @@ function rt_libro_lrq_errornoubigeoperu()
         <p><?php _e("Libro de Reclamaciones y Quejas: The module needs to have Peru's Ubigeo installed to operate correctly.", 'rt-libro'); ?></p>
     </div>
     <?php
+}
+
+function rt_libro_lrq_maybe_upgrade_database() {
+    if (get_option('rt_libro_db_version') !== VERSION_RT_LIBRO_RECLAMACIONES) {
+        rt_libro_lrq_create_tables_default();
+        update_option('rt_libro_db_version', VERSION_RT_LIBRO_RECLAMACIONES);
+    }
 }

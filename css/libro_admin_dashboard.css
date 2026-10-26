@@ -1,0 +1,29 @@
+/* Admin only: settings + claim details */
+.rtlr-detail,.rtlr-settings{max-width:1180px;margin:20px 0 28px}
+.rtlr-detail-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:23px 26px;background:#fff;border:1px solid #dcdcde;border-radius:12px;margin:12px 0 18px}
+.rtlr-detail-header h2{font-size:23px;margin:5px 0}.rtlr-detail-header p{color:#646970;margin:0}
+.rtlr-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#646970;font-weight:700}
+.rtlr-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.rtlr-panel{background:#fff;border:1px solid #dcdcde;border-radius:12px;padding:23px 26px;margin:0 0 18px;box-shadow:0 2px 6px rgba(0,0,0,.025)}
+.rtlr-panel h3{font-size:16px;margin:0 0 19px;padding-bottom:13px;border-bottom:1px solid #edf0f2}
+.rtlr-detail-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:19px 22px;margin:0}
+.rtlr-detail-fields div{min-width:0}.rtlr-detail-fields dt{color:#646970;font-size:12px;margin-bottom:5px}.rtlr-detail-fields dd{font-weight:550;font-size:14px;margin:0;overflow-wrap:anywhere;line-height:1.5}
+.rtlr-detail-long{margin:0 0 17px}.rtlr-detail-long:last-child{margin-bottom:0}.rtlr-detail-long strong{font-size:13px;color:#3c434a}.rtlr-detail-long p{background:#f7f8fa;border:1px solid #edf0f2;border-radius:7px;padding:13px 15px;line-height:1.6;overflow-wrap:anywhere;margin:8px 0 0}
+.rtlr-settings-head{margin-bottom:18px}.rtlr-settings-head h2{font-size:22px;margin:0 0 7px}.rtlr-settings-head p{color:#646970;margin:0}.rtlr-settings-panel{padding:22px 28px}.rtlr-settings-panel .form-table{margin:0}.rtlr-settings-panel .form-table th{width:225px;padding:18px 20px 18px 0}.rtlr-settings-panel .form-table td{padding:15px 0}.rtlr-settings-panel input.regular-text{max-width:100%;width:420px}.rtlr-settings-panel .large-text{max-width:100%}.rtlr-settings-panel .description{max-width:760px;line-height:1.6}.rtlr-settings .submit{margin-top:8px}
+@media(max-width:900px){.rtlr-detail-grid{grid-template-columns:1fr}.rtlr-detail-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.rtlr-detail-header{align-items:flex-start;flex-direction:column}.rtlr-detail-fields{grid-template-columns:1fr}.rtlr-panel{padding:18px}.rtlr-settings-panel .form-table th,.rtlr-settings-panel .form-table td{display:block;width:100%;padding:10px 0}.rtlr-settings-panel .form-table th{padding-bottom:0}}
+
+/* Paginated list navigation: avoid inherited stacked UL styles from plugins/themes. */
+.rtlr-admin .tablenav{display:flex;justify-content:flex-end;align-items:center;clear:both;margin:18px 0 10px;height:auto;min-height:36px}
+.rtlr-admin .tablenav .tablenav-pages{float:none;display:flex;align-items:center;margin:0}
+.rtlr-admin .tablenav-pages ul.page-numbers{display:flex;flex-direction:row;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
+.rtlr-admin .tablenav-pages ul.page-numbers li{display:inline-flex;float:none;list-style:none;margin:0;padding:0}
+.rtlr-admin .tablenav-pages .page-numbers a,.rtlr-admin .tablenav-pages .page-numbers span{display:inline-flex;align-items:center;justify-content:center;min-width:33px;min-height:33px;box-sizing:border-box;padding:6px 10px;border:1px solid #dcdcde;border-radius:5px;background:#fff;color:#2271b1;text-decoration:none;line-height:1.2;white-space:nowrap}
+.rtlr-admin .tablenav-pages .page-numbers .current{background:#2271b1;border-color:#2271b1;color:#fff;font-weight:600}
+.rtlr-admin .tablenav-pages .page-numbers .dots{background:transparent;border-color:transparent;color:#646970}
+.rtlr-admin .tablenav-pages .page-numbers a:hover{border-color:#2271b1;background:#f0f6fc}
+
+/* Identidad visual del panel — banner responsive */
+.woocommerce .rtlr-admin-hero { margin: 12px 0 18px; max-width: 100%; background: #f7fbf8; border: 1px solid #d6e3da; border-radius: 12px; box-shadow: 0 2px 10px rgba(12, 57, 31, .07); overflow: hidden; line-height: 0; }
+.woocommerce .rtlr-admin-hero img { display: block; width: 100%; height: auto; max-width: 100%; }
+@media screen and (max-width: 782px) { .woocommerce .rtlr-admin-hero { margin: 8px 0 14px; border-radius: 8px; } }

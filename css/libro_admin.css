@@ -127,11 +127,7 @@ input#submit, input[type="button"], input[type="submit"] {
     clear: both;
 }
 
-#responsive-form select {
-    font-size: 1em;
-    padding: 9px;
-    width: 300px;
-}
+/* Los selectores heredan la apariencia visual del tema. */
 
 /* already defined in bootstrap4 */
 .text-xs-center {
@@ -179,10 +175,18 @@ label.error{
     height: 40px;
 }
 
-#responsive-form select {
-    width: 100% !important;
-    padding: 5px !important;
+/* 1.3.12: cada fila encierra sus columnas flotantes; no permitir que
+   un select más alto empuje los campos de las siguientes filas. */
+#responsive-form .form-row-libro::after {
+    content: "";
+    display: table;
+    clear: both;
 }
+/* Los select nativos reciben su apariencia del tema activo.
+   No forzar ancho, altura, padding ni apariencia. */
+#responsive-form .column-half,
+#responsive-form .column-two,
+#responsive-form .column-full { min-width: 0; }
 
 #responsive-form textarea {
     width: 100%; /* Hace que ocupe todo el ancho disponible */
@@ -213,4 +217,143 @@ label.error{
     section {
          padding: 0rem 0; 
     }
+}
+/* Keep the consent statement and embedded links on one flowing line. */
+.rt-libro-consent { display:flex; align-items:flex-start; gap:8px; text-align:left; }
+.rt-libro-consent input[type="checkbox"] { flex:0 0 auto; margin-top:4px; }
+.rt-libro-consent-text { display:inline; flex:1; min-width:0; line-height:1.6; overflow-wrap:break-word; }
+.rt-libro-consent-text a { display:inline; text-decoration:underline; }
+
+/* Versión 1.3.6: dirección a dos columnas en modo simplificado. */
+@media only screen and (min-width: 48em) {
+  #responsive-form .rt-libro-address-wide { width: 66.666667%; }
+}
+#responsive-form .rt-libro-address-wide input { width: 100%; max-width: 100%; box-sizing: border-box; }
+
+/* 1.3.11: presentación neutra de empresa; tipografía y colores del tema. */
+#responsive-form .rt-libro-company {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+#responsive-form .rt-libro-company-logo {
+    display: block;
+    max-width: 150px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    flex: 0 0 auto;
+}
+#responsive-form .rt-libro-company-details {
+    flex: 1 1 190px;
+    min-width: 0;
+    font: inherit;
+    color: inherit;
+    overflow-wrap: anywhere;
+}
+#responsive-form .rt-libro-company-details > div { margin-block: 0 0.25em; }
+#responsive-form .rt-libro-company-details strong { color: inherit; font: inherit; font-weight: 700; }
+@media (max-width: 480px) {
+    #responsive-form .rt-libro-company { align-items: flex-start; }
+    #responsive-form .rt-libro-company-logo { max-width: 110px; max-height: 80px; }
+}
+
+/* 1.3.14: Maquetación semántica de los desplegables.
+   Solo controlar el flujo y el ancho del campo; el tema define su apariencia. */
+#rt_form_libro #responsive-form .rt-libro-field-label {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.25rem;
+}
+#rt_form_libro #responsive-form .rt-libro-field-label + select {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    /* El tema utiliza una altura menor que los inputs (40px).
+       Se normaliza la caja sin imponer el aspecto visual del tema. */
+    height: 40px !important;
+    min-height: 40px !important;
+    line-height: normal !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    vertical-align: middle;
+    /* 1.3.16: algunos temas eliminan el borde inferior del select.
+       Recuperarlo sin modificar los otros tres bordes ni la flecha nativa. */
+    border-bottom: 1px solid #d3d3d3 !important;
+}
+
+/* 1.3.17: confirmación de registro. Estilos limitados al mensaje,
+   no a los inputs, selects ni a los colores propios del tema. */
+#rt_form_libro #responsive-form .rtlr-confirmation-row { margin-bottom: 1.25rem; }
+#rt_form_libro #responsive-form .rtlr-confirmation {
+    box-sizing: border-box;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    width: 100%;
+    padding: 18px 20px;
+    border: 1px solid #cfe6d4;
+    border-left: 4px solid #37864c;
+    border-radius: 8px;
+    background: #f4faf5;
+    color: #24372a;
+    text-align: left;
+}
+#rt_form_libro #responsive-form .rtlr-confirmation-icon {
+    flex: 0 0 29px;
+    width: 29px;
+    height: 29px;
+    line-height: 29px;
+    border-radius: 50%;
+    background: #37864c;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+#rt_form_libro #responsive-form .rtlr-confirmation-content { flex: 1; min-width: 0; }
+#rt_form_libro #responsive-form .rtlr-confirmation-title {
+    display: block;
+    color: inherit;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+#rt_form_libro #responsive-form .rtlr-confirmation-description {
+    margin: 5px 0 12px;
+    color: #435747;
+    font-size: 14px;
+    line-height: 1.6;
+}
+#rt_form_libro #responsive-form .rtlr-confirmation-reference {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 12px;
+    color: #435747;
+    font-size: 14px;
+}
+#rt_form_libro #responsive-form .rtlr-confirmation-reference strong {
+    font-size: 20px;
+    line-height: 1.3;
+    letter-spacing: .02em;
+    color: #205f31;
+}
+@media (max-width: 480px) {
+    #rt_form_libro #responsive-form .rtlr-confirmation { padding: 14px; gap: 10px; }
+    #rt_form_libro #responsive-form .rtlr-confirmation-title { font-size: 16px; }
 }
